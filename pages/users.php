@@ -4,4 +4,6 @@ include_once '../sys/database.php';
 
 $query = "SELECT * FROM users";
 $result = mysqli_query($link, $query);
+
+dnd($result);
 ?>
