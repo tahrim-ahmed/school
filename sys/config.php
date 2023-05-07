@@ -10,7 +10,7 @@ session_start();
 
 function base_url($uri = '')
 {
-    return 'http://' . $_SERVER["HTTP_HOST"] . ($_SERVER["HTTP_HOST"] == "/school") . '/' . ($uri ? $uri : '');
+    return 'http://' . $_SERVER["HTTP_HOST"] . ($_SERVER["HTTP_HOST"] == 'serveraddress.com' ? "" : "/school") . '/' . ($uri ? $uri : '');
 }
 
 function dnp($data)

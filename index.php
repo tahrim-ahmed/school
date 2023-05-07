@@ -1,3 +1,33 @@
+<?php
+
+include_once 'sys/config.php';
+if (isset($_SESSION['user'])) {
+  $row = $_SESSION['user'];
+  header('Location:' . base_url('pages/dashboard.php'));
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $user_name = $_POST['user_name'];
+  $password = $_POST['password'];
+  $result = $link->query("SELECT * FROM `users` WHERE `user_name` = '$user_name'");
+  if ($result->num_rows > 0) {
+    $row = (object)$result->fetch_assoc();
+    if ($password == $row->password) {
+      //session_start();
+      $user_result = $link->query("SELECT users.*, teacher.* FROM `users` LEFT JOIN `teacher` ON users.teacher_id = teacher.teacher_id");
+      $user_row = (object)$user_result->fetch_assoc();
+      $_SESSION['user'] = (object)['id' => $user_row->user_id, 'name' => $user_row->teacher_name];
+      header('Location: ' . base_url('pages/dashboard.php'));
+    } else {
+      setMessage('User and password Not matched!', 'danger');
+    }
+  } else {
+    setMessage('User not exists!', 'danger');
+  }
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +41,7 @@
 
   <!-- CSS  -->
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>Mark</title>
 </head>
 
 <body>
@@ -24,18 +54,18 @@
         <div class="col-sm-6 text-black  ">
           <div class="d-flex align-items-center justify-content-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-            <form style="width: 23rem;">
+            <form style="width: 23rem;" method="POST">
 
               <h3 class="fw-bold text-center pb-3" style="letter-spacing: 1px;">Sign in</h3>
 
               <div class="form-group ">
                 <label class="form-label" for="form2Example18">User Name</label>
-                <input type="email" id="form2Example18" class="form-control form-control-lg" />
+                <input type="text" name="user_name" id="form2Example18" class="form-control form-control-lg" />
               </div>
 
               <div class="form-outline mt-2">
                 <label class="form-label" for="form2Example28">Password</label>
-                <input type="password" id="form2Example28" class="form-control form-control-lg" />
+                <input type="password" name="password" id="form2Example28" class="form-control form-control-lg" />
               </div>
 
               <p class="small mb-2 mt-2 pb-lg-2"><a class="text-muted" href="#!">Forgot your password?</a></p>
