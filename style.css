@@ -12,6 +12,19 @@ body {
     z-index: -1;
 }
 
+.bkg{
+    background-color:#142640 ;
+}
+.button1{
+    background-color: #142640;
+    border: 1px solid white;
+    color: white;
+}
+
+.button2 {
+    width: 190px; /* set the desired width for the buttons */
+    height: 45px; /* set the desired height for the buttons */
+}
 /* Vertical Line  */
 .row::before {
     content: "";
