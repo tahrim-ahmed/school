@@ -45,7 +45,7 @@ $result = mysqli_query($link, $query);
     <div class=" mx-auto pt-3 mt-5">
         <div class="padding-left-5 p-4 d-flex  justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button " class="button1 px-5 py-1 fw-bold">Home</button>
-            <button onclick="window.location.href = 'user.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
+            <button onclick="window.location.href = 'students.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
             <button type="button" class="button1 px-5 fw-bold">Notifications</button>
             <button type="button" class="button1 px-5 fw-bold">Settings</button>
         </div>
@@ -53,7 +53,7 @@ $result = mysqli_query($link, $query);
 
     <!-- Student Details  -->
     <div class="d-flex align-items-center  justify-content-around">
-        <table id="student_data" class="table table-bordered">
+        <table id="student_data" class="table">
                 <thead style="color: black">
                 <tr>
                     <th>First Name</th>
@@ -97,7 +97,7 @@ $result = mysqli_query($link, $query);
         var Table = $('#student_data').DataTable({
             'bServerSide': false,
             'ordering': false,
-            dom: '<"row"<"col"B><"col-auto"f>>rt<"row"<"col"i><"col-auto"l>>p',
+            dom: '<"row"<"col"><"col-auto"f>>rt<"row"<"col"i><"col-auto"l>>p',
             buttons: ['colvis',
                 {
                     extend: 'collection',

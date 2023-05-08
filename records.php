@@ -52,7 +52,7 @@ $result = mysqli_query($link, $query);
     <div class=" mx-auto pt-3 mt-5">
         <div class="padding-left-5 p-4 d-flex  justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button " class="button1 px-5 py-1 fw-bold">Home</button>
-            <button onclick="window.location.href = 'user.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
+            <button onclick="window.location.href = 'students.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
             <button type="button" class="button1 px-5 fw-bold">Notifications</button>
             <button type="button" class="button1 px-5 fw-bold">Settings</button>
         </div>
@@ -60,24 +60,29 @@ $result = mysqli_query($link, $query);
 
     <!-- Student Details  -->
     <div class="d-flex align-items-center  justify-content-around">
-        <table id="student_data" class="table table-bordered">
+        <table id="student_data" class="table">
                 <thead style="color: black">
                 <tr>
+                    <th>▢</th>
                     <th>First Name</th>
                     <th>Surname</th>
-                    <th>Date of Birth</th>
+                    <th>Attendance</th>
+                    <th>Result</th>
+                    <th>Total</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                $total = 0;
                 while ($row = mysqli_fetch_array($result)) {
                     ?>
-                    <tr style="color: black">
-                        <td><?= $row["teacher_name"] ?></td>
-                        <td><?= $row["class_name"] ?></td>
-                        <td><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
+                    <tr>
+                        <td style="color: <?= ($row["attendance"] + $row["result"])<40 ? 'red' : 'green' ?>;">■</td>
+                        <td style="color: black"><?= $row["first_name"] ?></td>
+                        <td style="color: black"><?= $row["sur_name"] ?></td>
+                        <td style="color: black"><?= $row["attendance"] ?></td>
+                        <td style="color: black"><?= $row["result"] ?></td>
+                        <td style="color: black"><?= $row["attendance"] + $row["result"] ?></td>
                         <td>
                             <button class="button1 px-2 py-1 fw-bold"><i class="fa fa-pencil"></i></button>
                         </td>
@@ -104,7 +109,7 @@ $result = mysqli_query($link, $query);
             'bServerSide': false,
             'ordering': false,
             dom: '<"row"<"col"B><"col-auto"f>>rt<"row"<"col"i><"col-auto"l>>p',
-            buttons: ['colvis',
+            buttons: [
                 {
                     extend: 'collection',
                     text: 'Export',
