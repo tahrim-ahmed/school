@@ -3,7 +3,7 @@
 include_once 'sys/config.php';
 if (isset($_SESSION['user'])) {
   $row = $_SESSION['user'];
-  header('Location:' . base_url('pages/dashboard.php'));
+  header('Location:' . base_url('dashboard.php'));
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $user_result = $link->query("SELECT users.*, teacher.* FROM `users` LEFT JOIN `teacher` ON users.teacher_id = teacher.teacher_id");
       $user_row = (object)$user_result->fetch_assoc();
       $_SESSION['user'] = (object)['id' => $user_row->user_id, 'name' => $user_row->teacher_name];
-      header('Location: ' . base_url('pages/dashboard.php'));
+      header('Location: ' . base_url('dashboard.php'));
     } else {
       setMessage('User and password Not matched!', 'danger');
     }

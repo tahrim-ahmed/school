@@ -1,12 +1,11 @@
 <?php
-//include_once '../sys/config.php';
-//include_once '../sys/database.php';
-//
-//$query = "SELECT * FROM teacher";
-//$result = mysqli_query($link, $query);
-//
-//dnd($result);
-//
+include_once 'sys/config.php';
+include_once 'sys/database.php';
+
+$query = "SELECT * FROM teacher";
+$result = mysqli_query($link, $query);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +29,7 @@
     <div class=" mx-auto pt-3 mt-5">
         <div class="padding-left-5 p-4 d-flex  justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button " class="button1 px-5 py-1 fw-bold">Home</button>
-            <button onclick="window.location.href = 'user.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
+            <button onclick="window.location.href = 'students.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
             <button type="button" class="button1 px-5 fw-bold">Notifications</button>
             <button type="button" class="button1 px-5 fw-bold">Settings</button>
         </div>
