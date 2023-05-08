@@ -46,11 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 <img src="./image/cover.jpg" id="background-img">
-<section class="container-fluid ">
+<section class="container-fluid center-div ">
   <div class="bg-white mx-auto w-50 pt-3 mt-5">
     <p class="font-weight  text-center display-4 m-0">Welcome</p>
     <div class="container-fluid">
-      <div class="row d-flex align-items-center">
+      <div class="row d-flex align-items-center justify-content-center">
         <div class="col-sm-6 text-black  ">
           <div class="d-flex align-items-center justify-content-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
