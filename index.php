@@ -3,7 +3,7 @@
 include_once 'sys/config.php';
 if (isset($_SESSION['user'])) {
   $row = $_SESSION['user'];
-  header('Location:' . base_url('pages/dashboard.php'));
+  header('Location:' . base_url('dashboard.php'));
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $user_result = $link->query("SELECT users.*, teacher.* FROM `users` LEFT JOIN `teacher` ON users.teacher_id = teacher.teacher_id");
       $user_row = (object)$user_result->fetch_assoc();
       $_SESSION['user'] = (object)['id' => $user_row->user_id, 'name' => $user_row->teacher_name];
-      header('Location: ' . base_url('pages/dashboard.php'));
+      header('Location: ' . base_url('dashboard.php'));
     } else {
       setMessage('User and password Not matched!', 'danger');
     }
@@ -46,11 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 <img src="./image/cover.jpg" id="background-img">
-<section class="container-fluid ">
+<section class="container-fluid center-div ">
   <div class="bg-white mx-auto w-50 pt-3 mt-5">
     <p class="font-weight  text-center display-4 m-0">Welcome</p>
     <div class="container-fluid">
-      <div class="row d-flex align-items-center">
+      <div class="row d-flex align-items-center justify-content-center">
         <div class="col-sm-6 text-black  ">
           <div class="d-flex align-items-center justify-content-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 

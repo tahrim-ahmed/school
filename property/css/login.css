@@ -1,0 +1,180 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Acme', sans-serif;
+}
+
+.header{
+    height: 100vh;
+}
+
+.navbar-style{
+    box-shadow: 0 5px 10px #efefef;
+    text-transform: uppercase;
+}
+
+.logo{
+    height: 50px;
+    padding: 2px 10px;
+}
+
+.icon-bar{
+    background: #0000FF;
+}
+
+li a{
+    color: blue;
+}
+
+.container{
+    text-align: justify;
+    font-size: 15px;
+}
+
+.name{
+    font-size: 47px;
+    color: #002166;
+}
+
+.text{
+    font-size: 17px;
+    color: black;
+}
+
+.btn-first{
+    margin: 30px 10px;
+    width: 150px;
+    padding: 10px;
+    border-radius: 20px;
+    background: #002166;
+    color: white;
+}
+
+.btn-first:hover{
+    background: #46b8da;
+    color: #002166;
+}
+
+.centerdiv{
+    width: 350px;
+    height: 340px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: whitesmoke;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+
+.centerdiv2{
+    width: 350px;
+    height: 590px;
+    position: absolute;
+    top: 800%;
+    left: 50%;
+    background: whitesmoke;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+
+#profilepic{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: relative;
+    top: 15px;
+    left: calc((350px - 120px)/2);
+    margin-bottom: 35px;
+}
+
+input{
+    color: darkblue;
+}
+
+.inputbox{
+    width: 80%;
+    height: 35px;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+    border: none;
+    border-bottom: 1px solid;
+    border-bottom-color: black;
+    background: none;
+    margin-bottom: 5px;
+    font-size: 17px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+.inputbox2{
+    width: 80%;
+    height: 35px;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+    background: black;
+    margin-bottom: 5px;
+    font-size: 17px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+::placeholder{
+    font-size: 17px;
+    padding-left: 10px;
+    color: gray;
+    font-weight: bold;
+}
+
+#dropdown{
+    width: 80%;
+    height: 35px;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+button:hover{
+    background: white;
+    color: black;
+    font-weight: bold;
+}
+
+h2{
+    text-align: center;
+    color: black;
+    font-size: 15px;
+    word-spacing: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.date{
+    width: 80%;
+    height: 35px;
+    background: none;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
+    padding-left: 10px;
+    margin-bottom: -3px;
+}
+
+.body{
+    height: 280px;
+    width: 1525px;
+    border: 3px solid black;
+    margin-left: 10%;
+    position: center;
+    font-size: 20px;
+    padding: 25px;
+    text-align: justify;
+}

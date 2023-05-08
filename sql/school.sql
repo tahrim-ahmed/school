@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2023 at 08:53 AM
+-- Generation Time: May 08, 2023 at 05:59 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -45,14 +45,64 @@ INSERT INTO `class` (`class_id`, `class_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `record`
+--
+
+CREATE TABLE `record` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `attendance` int(11) NOT NULL,
+  `result` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `record`
+--
+
+INSERT INTO `record` (`id`, `student_id`, `attendance`, `result`) VALUES
+(1, 1, 40, 40),
+(2, 2, 30, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student`
 --
 
 CREATE TABLE `student` (
   `student_id` int(11) NOT NULL,
-  `student_name` text NOT NULL,
+  `first_name` text NOT NULL,
+  `sur_name` text NOT NULL,
   `date_of_birth` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_id`, `first_name`, `sur_name`, `date_of_birth`) VALUES
+(1, 'Tahrim', 'Ahmed', '1997-12-06 13:25:23'),
+(2, 'Sarwar', 'Jahan', '1997-12-30 14:02:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_class`
+--
+
+CREATE TABLE `student_class` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_class`
+--
+
+INSERT INTO `student_class` (`id`, `class_id`, `student_id`) VALUES
+(1, 1, 1),
+(2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -127,10 +177,25 @@ ALTER TABLE `class`
   ADD PRIMARY KEY (`class_id`);
 
 --
+-- Indexes for table `record`
+--
+ALTER TABLE `record`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`student_id`);
+
+--
+-- Indexes for table `student_class`
+--
+ALTER TABLE `student_class`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `class_id` (`class_id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `teacher`
@@ -164,10 +229,22 @@ ALTER TABLE `class`
   MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `record`
+--
+ALTER TABLE `record`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `student_class`
+--
+ALTER TABLE `student_class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `teacher`
@@ -190,6 +267,19 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `record`
+--
+ALTER TABLE `record`
+  ADD CONSTRAINT `record_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`);
+
+--
+-- Constraints for table `student_class`
+--
+ALTER TABLE `student_class`
+  ADD CONSTRAINT `student_class_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`class_id`),
+  ADD CONSTRAINT `student_class_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`);
 
 --
 -- Constraints for table `teacher_class`
