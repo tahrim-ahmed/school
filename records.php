@@ -2,7 +2,14 @@
 include_once 'sys/config.php';
 include_once 'sys/database.php';
 
-$query = "SELECT * FROM student";
+$user = getUser($_SESSION['user']->id);
+$user_id = $user->user_id;
+
+$get_teacher_by_user_id = $link->query("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
+$get_teacher = (object)$get_teacher_by_user_id->fetch_assoc();
+$get_teacher_id = $get_teacher->teacher_id;
+
+$query = "SELECT record.*, student.*, student_class.*, class.*, teacher_class.*, teacher.* FROM record INNER JOIN student ON record.student_id = student.student_id INNER JOIN student_class ON student.student_id = student_class.student_id INNER JOIN class ON student_class.class_id = class.class_id INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $result = mysqli_query($link, $query);
 
 
@@ -68,12 +75,11 @@ $result = mysqli_query($link, $query);
                 while ($row = mysqli_fetch_array($result)) {
                     ?>
                     <tr style="color: black">
-                        <td><?= $row["first_name"] ?></td>
-                        <td><?= $row["sur_name"] ?></td>
+                        <td><?= $row["teacher_name"] ?></td>
+                        <td><?= $row["class_name"] ?></td>
                         <td><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
                         <td>
                             <button class="button1 px-2 py-1 fw-bold"><i class="fa fa-pencil"></i></button>
-                            <button class="button1 px-2 py-1 fw-bold"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
                     <?php
