@@ -23,7 +23,7 @@ $result = mysqli_query($link, $query);
 
 <body>
 <img src="./image/cover.jpg" id="background-img">
-<section class="container-fluid bkg w-75 text-white pb-5">
+<section class="container-fluid center-div-dashboard bkg w-75 text-white pb-5">
 
     <!-- Menu Button  -->
     <div class=" mx-auto pt-3 mt-5">
