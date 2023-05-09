@@ -13,10 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($result->num_rows > 0) {
     $row = (object)$result->fetch_assoc();
     if ($password == $row->password) {
-      //session_start();
-      $user_result = $link->query("SELECT users.*, teacher.* FROM `users` LEFT JOIN `teacher` ON users.teacher_id = teacher.teacher_id");
-      $user_row = (object)$user_result->fetch_assoc();
-      $_SESSION['user'] = (object)['id' => $user_row->user_id, 'name' => $user_row->teacher_name];
+      session_start();
+      $_SESSION['user'] = (object)['id' => $row->user_id];
       header('Location: ' . base_url('dashboard.php'));
     } else {
       setMessage('User and password Not matched!', 'danger');
@@ -40,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
   <!-- CSS  -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.css">
   <title>Mark</title>
 </head>
 

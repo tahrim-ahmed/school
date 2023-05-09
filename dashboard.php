@@ -2,9 +2,18 @@
 include_once 'sys/config.php';
 include_once 'sys/database.php';
 
-$query = "SELECT * FROM teacher";
-$result = mysqli_query($link, $query);
+$user = getUser($_SESSION['user']->id);
+$user_id = $user->user_id;
 
+$get_user_by_id = $link->query("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
+$get_user = (object)$get_user_by_id->fetch_assoc();
+$get_teacher_id = $get_user->teacher_id;
+
+$get_teacher_by_teacher_id = $link->query("SELECT * FROM `teacher` WHERE `teacher_id` = '$get_teacher_id'");
+$get_teacher = (object)$get_teacher_by_teacher_id->fetch_assoc();
+
+$class_query = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result = mysqli_query($link, $class_query);
 
 ?>
 
@@ -22,16 +31,38 @@ $result = mysqli_query($link, $query);
 </head>
 
 <body>
-<img src="./image/cover.jpg" id="background-img">
+<img src="./image/cover.jpg" id="background-img" alt="background">
 <section class="container-fluid center-div-dashboard bkg w-75 text-white pb-5">
 
     <!-- Menu Button  -->
-    <div class=" mx-auto pt-3 mt-5">
+    <div class=" mx-auto pt-3">
         <div class="padding-left-5 p-4 d-flex  justify-content-around">
-            <button onclick="window.location.href = 'index.php';" type="button " class="button1 px-5 py-1 fw-bold">Home</button>
-            <button onclick="window.location.href = 'students.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
+            <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
+            <div class="dropdown">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    View Students
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <?php
+            while ($class_row = mysqli_fetch_array($class_result)) {
+                ?>
+                <a class="dropdown-item button1 fw-bold" href="students.php"><?= $class_row["class_name"] ?></a>
+                <?php
+            }
+            ?>
+                </div>
+            </div>
+<!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
             <button type="button" class="button1 px-5 fw-bold">Notifications</button>
-            <button type="button" class="button1 px-5 fw-bold">Settings</button>
+            <div class="dropdown">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    Settings
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold"><?= $get_teacher->teacher_name ?></a>
+                    <a class="dropdown-item button1 fw-bold" href="logout.php">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -46,8 +77,26 @@ $result = mysqli_query($link, $query);
             <h5 class="">You currently have:</h5>
             <h4 class="">3 Students</h4>
             <h5>Who are underperforming</h5>
-            <button class="btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">View Students</button><br>
-            <button onclick="window.location.href = 'records.php';" class="btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold" style="background-color: #ffffff; color: #142640;">View Record</button>
+
+<!--            view students and view record button -->
+            <div class="dropdown">
+                <button class="dropdown-toggle rounded p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    View Students
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold" href="students.php">Class One</a>
+                </div>
+            </div>
+<!--            <button class="btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">View Students</button><br>-->
+            <div class="dropdown">
+                <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    View Record
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold" href="records.php">Class One</a>
+                </div>
+            </div>
+<!--            <button onclick="window.location.href = 'records.php';" class="btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold" style="background-color: #ffffff; color: #142640;">View Record</button>-->
         </div>
 
 
@@ -57,7 +106,7 @@ $result = mysqli_query($link, $query);
             <div class="ps-4 p-3 border border-white text-center">
                 <button class="button2 btn btn-outline-dark btn-lg btn-block mb-3 fw-bold px-5" style="background-color: #ffffff; color: #142640;">Help</button><br>
                 <button class="button2 btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold px-4" style="background-color: #ffffff; color: #142640;">Support</button><br>
-                <button class="text-small btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">Generate Report</button>
+                <button onclick="window.location.href = 'records.php';" class="text-small btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">Generate Report</button>
             </div>
         </div>
 
