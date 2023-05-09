@@ -21,27 +21,21 @@ body {
 
 .center-div-dashboard{
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.bkg{
-    background-color:#142640 ;
+/* Vertical Line  */
+.row::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 30%; /* adjust this value to adjust the distance of the line from the top */
+    bottom: 10%; /* adjust this value to adjust the distance of the line from the bottom */
+    border-left: 3px solid #142640;
+    height: 40%;
 }
-.button1{
-    background-color: #142640;
-    border: 1px solid white;
-    color: white;
-    height: 40px;
-    width: 180px;
-}
-
-.button2 {
-    width: 190px; /* set the desired width for the buttons */
-    height: 45px; /* set the desired height for the buttons */
-}
-
 .col-sm-6 {
     position: relative;
     padding-left: 30px;
@@ -54,5 +48,3 @@ body {
 
 .font-weight {
     font-weight: 700;
-
-}

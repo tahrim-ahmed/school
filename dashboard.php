@@ -22,7 +22,7 @@ $result = mysqli_query($link, $query);
 </head>
 
 <body>
-<img src="./image/cover.jpg" id="background-img">
+<img src="./image/cover.jpg" id="background-img" alt="background">
 <section class="container-fluid center-div-dashboard bkg w-75 text-white pb-5">
 
     <!-- Menu Button  -->
@@ -91,7 +91,7 @@ $result = mysqli_query($link, $query);
             <div class="ps-4 p-3 border border-white text-center">
                 <button class="button2 btn btn-outline-dark btn-lg btn-block mb-3 fw-bold px-5" style="background-color: #ffffff; color: #142640;">Help</button><br>
                 <button class="button2 btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold px-4" style="background-color: #ffffff; color: #142640;">Support</button><br>
-                <button class="text-small btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">Generate Report</button>
+                <button onclick="window.location.href = 'records.php';" class="text-small btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">Generate Report</button>
             </div>
         </div>
 

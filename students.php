@@ -39,27 +39,95 @@ $result = mysqli_query($link, $query);
 
 <body>
 <img src="./image/cover.jpg" id="background-img">
-<section class="container-fluid bkg w-75 text-white pb-5">
+<section class="container-fluid bkg w-75 mt-5 text-white pb-5">
 
     <!-- Menu Button  -->
-    <div class=" mx-auto pt-3 mt-5">
-        <div class="padding-left-5 p-4 d-flex  justify-content-around">
-            <button onclick="window.location.href = 'index.php';" type="button " class="button1 px-5 py-1 fw-bold">Home</button>
-            <button onclick="window.location.href = 'students.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
+    <div class=" mx-auto pt-3">
+        <div class="padding-left-5 p-4 d-flex justify-content-around">
+            <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
+            <div class="dropdown">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    View Students
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold" href="students.php">Class One</a>
+                </div>
+            </div>
+            <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
             <button type="button" class="button1 px-5 fw-bold">Notifications</button>
-            <button type="button" class="button1 px-5 fw-bold">Settings</button>
+            <div class="dropdown">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    Settings
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold" href="#">Teacher Name</a>
+                    <a class="dropdown-item button1 fw-bold" href="#">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Welcome Message  -->
+<div class="d-flex align-items-center justify-content-between px-3">
+    <div class="d-flex align-items-center justify-content-center">
+        <h4 class="pb-4">Student Information</h4>
+    </div>
+    <div class="dropdown">
+        <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+            Add Student
+        </button>
+
+<!--        Add Student Modal -->
+        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 text-black font-weight-bold">Add New Student</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3 text-black">
+                        <div class="md-form mb-5">
+                            <input type="text" id="first-name" class="form-control validate" required>
+                            <label data-error="wrong" data-success="right" for="orangeForm-name">First Name</label>
+                        </div>
+                        <div class="md-form mb-5">
+                            <input type="text" id="sur-name" class="form-control validate" required>
+                            <label data-error="wrong" data-success="right" for="orangeForm-email">Surname</label>
+                        </div>
+
+                        <div class="md-form mb-4">
+                            <input type="date" id="date-of-birth" class="form-control validate" required>
+                            <label data-error="wrong" data-success="right" for="orangeForm-pass">Date of Birth</label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="button1 fw-bold">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--        Add student Dropdown -->
+        <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item button1 fw-bold" data-toggle="modal" data-target="#modalRegisterForm"  href="">Class One</a>
+        </div>
+    </div>
+</div>
+
     <!-- Student Details  -->
-    <div class="d-flex align-items-center  justify-content-around">
-        <table id="student_data" class="table">
+    <div class="d-flex align-items-center justify-content-around">
+        <table id="student_data" class="table table-striped bg-light rounded p-1 ">
                 <thead style="color: black">
-                <tr>
-                    <th>First Name</th>
-                    <th>Surname</th>
-                    <th>Date of Birth</th>
-                    <th>Action</th>
+                <tr class="px-5">
+                    <th class="px-5 text-center" scope="col">ID</th>
+                    <th class="px-5 text-center" scope="col">First Name</th>
+                    <th class="px-5 text-center" scope="col">Surname</th>
+                    <th class="px-5 text-center" scope="col">Date of Birth</th>
+                    <th class="px-5 text-center" scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,12 +136,13 @@ $result = mysqli_query($link, $query);
                 while ($row = mysqli_fetch_array($result)) {
                     ?>
                     <tr style="color: black">
-                        <td><?= $row["first_name"] ?></td>
-                        <td><?= $row["sur_name"] ?></td>
-                        <td><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
-                        <td>
-                            <button class="button1 px-2 py-1 fw-bold"><i class="fa fa-pencil"></i></button>
-                            <button class="button1 px-2 py-1 fw-bold"><i class="fa fa-trash"></i></button>
+                        <td class="px-5 text-center"><?= $row["student_id"] ?></td>
+                        <td class="px-5 text-center"><?= $row["first_name"] ?></td>
+                        <td class="px-5 text-center"><?= $row["sur_name"] ?></td>
+                        <td class="px-5 text-center"><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
+                        <td class="text-center">
+                            <button class="btn btn-sm px-2 py-1 border border-success"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
                     <?php
