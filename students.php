@@ -16,25 +16,25 @@ $result = mysqli_query($link, $query);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url('property/vendors/autocomplete/style.css')?>">
-    <link rel="stylesheet" type="text/css" href="<?=base_url('property/vendors/datatables/dataTables.bootstrap4.min.css')?>">
-    <link rel="stylesheet" type="text/css" href="<?=base_url('property/vendors/select2/select2.min.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/autocomplete/style.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/datatables/dataTables.bootstrap4.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/select2/select2.min.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>Document</title>
 
-    <script src="<?=base_url('property/vendors/jquery.min.js')?>"></script>
-    <script src="<?=base_url('property/vendors/popper.min.js')?>"></script>
-    <script src="<?=base_url('property/vendors/bootstrap/js/bootstrap.min.js')?>"></script>
-    <script src="<?=base_url('property/vendors/daterangePicker/moment.min.js')?>"></script>
+    <script src="<?= base_url('property/vendors/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('property/vendors/popper.min.js') ?>"></script>
+    <script src="<?= base_url('property/vendors/bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="<?= base_url('property/vendors/daterangePicker/moment.min.js') ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="<?=base_url('property/vendors/daterangePicker/daterangepicker.js')?>"></script>
-    <script src="<?=base_url('property/vendors/datatables/datatables.min.js')?>"></script>
-    <script src="<?=base_url('property/vendors/select2/select2.full.min.js')?>"></script>
-    <script src="<?=base_url('property/js/scripts.js')?>"></script>
-    <script src="<?=base_url('property/vendors/bootstrap/js/jqBootstrapValidation.js')?>"></script>
+    <script src="<?= base_url('property/vendors/daterangePicker/daterangepicker.js') ?>"></script>
+    <script src="<?= base_url('property/vendors/datatables/datatables.min.js') ?>"></script>
+    <script src="<?= base_url('property/vendors/select2/select2.full.min.js') ?>"></script>
+    <script src="<?= base_url('property/js/scripts.js') ?>"></script>
+    <script src="<?= base_url('property/vendors/bootstrap/js/jqBootstrapValidation.js') ?>"></script>
 </head>
 
 <body>
@@ -46,7 +46,7 @@ $result = mysqli_query($link, $query);
         <div class="padding-left-5 p-4 d-flex justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     View Students
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
@@ -56,7 +56,7 @@ $result = mysqli_query($link, $query);
             <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
             <button type="button" class="button1 px-5 fw-bold">Notifications</button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     Settings
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
@@ -68,93 +68,146 @@ $result = mysqli_query($link, $query);
     </div>
 
     <!-- Welcome Message  -->
-<div class="d-flex align-items-center justify-content-between px-3">
-    <div class="d-flex align-items-center justify-content-center">
-        <h4 class="pb-4">Student Information</h4>
-    </div>
-    <div class="dropdown">
-        <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
-            Add Student
-        </button>
+    <div class="d-flex align-items-center justify-content-between px-3">
+        <div class="d-flex align-items-center justify-content-center">
+            <h4 class="pb-4">Student Information</h4>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                Add Student
+            </button>
 
-<!--        Add Student Modal -->
-        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h4 class="modal-title w-100 text-black font-weight-bold">Add New Student</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body mx-3 text-black">
-                        <div class="md-form mb-5">
-                            <input type="text" id="first-name" class="form-control validate" required>
-                            <label data-error="wrong" data-success="right" for="orangeForm-name">First Name</label>
+            <!--        Add Student Modal -->
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title w-100 text-black font-weight-bold text-center">Add New Student</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="md-form mb-5">
-                            <input type="text" id="sur-name" class="form-control validate" required>
-                            <label data-error="wrong" data-success="right" for="orangeForm-email">Surname</label>
-                        </div>
+                        <div class="modal-body mx-3 text-black">
+                            <div class="md-form mb-5">
+                                <input type="text" id="first-name" class="form-control validate" required>
+                                <label data-error="wrong" data-success="right" for="orangeForm-name">First Name</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <input type="text" id="sur-name" class="form-control validate" required>
+                                <label data-error="wrong" data-success="right" for="orangeForm-email">Surname</label>
+                            </div>
 
-                        <div class="md-form mb-4">
-                            <input type="date" id="date-of-birth" class="form-control validate" required>
-                            <label data-error="wrong" data-success="right" for="orangeForm-pass">Date of Birth</label>
-                        </div>
+                            <div class="md-form mb-4">
+                                <input type="date" id="date-of-birth" class="form-control validate" required>
+                                <label data-error="wrong" data-success="right" for="orangeForm-pass">Date of Birth</label>
+                            </div>
 
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button class="button1 fw-bold">Confirm</button>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="button1 fw-bold">Confirm</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-<!--        Add student Dropdown -->
-        <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item button1 fw-bold" data-toggle="modal" data-target="#modalRegisterForm"  href="">Class One</a>
+            <!--        Add student Dropdown -->
+            <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item button1 fw-bold" data-toggle="modal" data-target="#modalRegisterForm" href="">Class One</a>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- Student Details  -->
     <div class="d-flex align-items-center justify-content-around">
         <table id="student_data" class="table table-striped bg-light rounded p-1 ">
-                <thead style="color: black">
-                <tr class="px-5">
-                    <th class="px-5 text-center" scope="col">ID</th>
-                    <th class="px-5 text-center" scope="col">First Name</th>
-                    <th class="px-5 text-center" scope="col">Surname</th>
-                    <th class="px-5 text-center" scope="col">Date of Birth</th>
-                    <th class="px-5 text-center" scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $total = 0;
-                while ($row = mysqli_fetch_array($result)) {
-                    ?>
-                    <tr style="color: black">
-                        <td class="px-5 text-center"><?= $row["student_id"] ?></td>
-                        <td class="px-5 text-center"><?= $row["first_name"] ?></td>
-                        <td class="px-5 text-center"><?= $row["sur_name"] ?></td>
-                        <td class="px-5 text-center"><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
-                        <td class="text-center">
-                            <button class="btn btn-sm px-2 py-1 border border-success"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
-                    <?php
-                }
+            <thead style="color: black">
+            <tr class="px-5">
+                <th class="px-5 text-center" scope="col">ID</th>
+                <th class="px-5 text-center" scope="col">First Name</th>
+                <th class="px-5 text-center" scope="col">Surname</th>
+                <th class="px-5 text-center" scope="col">Date of Birth</th>
+                <th class="px-5" scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $total = 0;
+            while ($row = mysqli_fetch_array($result)) {
                 ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                    
+                <tr style="color: black">
+                    <td class="px-5 text-center"><?= $row["student_id"] ?></td>
+                    <td class="px-5 text-center"><?= $row["first_name"] ?></td>
+                    <td class="px-5 text-center"><?= $row["sur_name"] ?></td>
+                    <td class="px-5 text-center"><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
+                    <td class="px-5">
+
+                        <button class="btn btn-sm px-2 py-1 border border-success" data-toggle="modal" data-target="#modalRegisterForm2"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-sm px-2 py-1 border border-danger" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
+
+
+                        <!--        Edit Student Modal -->
+                        <div class="modal fade" id="modalRegisterForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit Student Information</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body mx-3 text-black">
+                                        <div class="md-form mb-5">
+                                            <input type="text" id="first-name" class="form-control validate" required>
+                                            <label style="text-align: left;" data-error="wrong" data-success="right" for="name">First Name</label>
+                                        </div>
+                                        <div class="md-form mb-5">
+                                            <input type="text" id="sur-name" class="form-control validate" required>
+                                            <label class="level" data-success="right" for="sur-name">Surname</label>
+                                        </div>
+
+                                        <div class="md-form mb-4">
+                                            <input type="date" id="date-of-birth" class="form-control validate" required>
+                                            <label data-error="wrong" data-success="right" for="date-of-birth">Date of Birth</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <button class="button1 fw-bold">Confirm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+<!--                        Delete Student Modal -->
+                        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title mx-auto" id="exampleModalLabel">Confirm Delete Student!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer mx-auto">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger">Confirm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
-                </tfoot>
-            </table>
+                <?php
+            }
+            ?>
+            </tbody>
+            <tfoot>
+            <tr>
+
+            </tr>
+            </tfoot>
+        </table>
     </div>
 </section>
 
@@ -162,7 +215,7 @@ $result = mysqli_query($link, $query);
 </body>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         var Table = $('#student_data').DataTable({
             'bServerSide': false,
             'ordering': false,
@@ -171,14 +224,13 @@ $result = mysqli_query($link, $query);
                 {
                     extend: 'collection',
                     text: 'Export',
-                    buttons: [
-                        {
-                            extend: 'csv',
-                            text: 'Export as Csv',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
+                    buttons: [{
+                        extend: 'csv',
+                        text: 'Export as Csv',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
                         {
                             extend: 'excel',
                             text: 'Export as Excel',
@@ -208,7 +260,10 @@ $result = mysqli_query($link, $query);
 </script>
 
 <style>
-    .select2-container, .select2-container .select2-selection, .select2-container .select2-selection__rendered, .select2-container .select2-selection__arrow {
+    .select2-container,
+    .select2-container .select2-selection,
+    .select2-container .select2-selection__rendered,
+    .select2-container .select2-selection__arrow {
         height: 38px !important;
         line-height: 38px !important;
     }
