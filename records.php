@@ -9,9 +9,14 @@ $get_teacher_by_user_id = $link->query("SELECT * FROM `users` WHERE `user_id` = 
 $get_teacher = (object)$get_teacher_by_user_id->fetch_assoc();
 $get_teacher_id = $get_teacher->teacher_id;
 
-$query = "SELECT record.*, student.*, student_class.*, class.*, teacher_class.*, teacher.* FROM record INNER JOIN student ON record.student_id = student.student_id INNER JOIN student_class ON student.student_id = student_class.student_id INNER JOIN class ON student_class.class_id = class.class_id INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$query = "SELECT record.*, student.*, student_class.*, class.*, teacher_class.*, teacher.* FROM record INNER JOIN student ON record.student_id = student.student_id INNER JOIN student_class ON student.student_id = student_class.student_id INNER JOIN class ON student_class.class_id = class.class_id INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id' AND class.class_name = '" . $_GET["class"] . "'";
 $result = mysqli_query($link, $query);
 
+$get_teacher_by_teacher_id = $link->query("SELECT * FROM `teacher` WHERE `teacher_id` = '$get_teacher_id'");
+$get_teacher = (object)$get_teacher_by_teacher_id->fetch_assoc();
+
+$class_query = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result = mysqli_query($link, $class_query);
 
 ?>
 
@@ -57,7 +62,15 @@ $result = mysqli_query($link, $query);
                     View Students
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item button1 fw-bold" href="students.php">Class One</a>
+                    <?php
+            while ($class_row = mysqli_fetch_array($class_result)) {
+                ?>
+                <a class="dropdown-item button1 fw-bold" href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
+                                        <?= $class_row["class_name"] ?>
+                </a>
+                <?php
+            }
+            ?>
                 </div>
             </div>
             <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
@@ -67,8 +80,8 @@ $result = mysqli_query($link, $query);
                     Settings
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item button1 fw-bold" href="#">Teacher Name</a>
-                    <a class="dropdown-item button1 fw-bold" href="#">Logout</a>
+                    <a class="dropdown-item button1 fw-bold"><?= $get_teacher->teacher_name ?></a>
+                    <a class="dropdown-item button1 fw-bold" href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -76,15 +89,7 @@ $result = mysqli_query($link, $query);
 
     <div class="d-flex align-items-center justify-content-between px-3">
         <div class="d-flex align-items-center justify-content-center">
-            <h4 class="pb-4">Student Record</h4>
-        </div>
-        <div class="dropdown">
-            <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
-                Select Class
-            </button>
-            <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item button1 fw-bold" href="students.php">Class One</a>
-            </div>
+            <h4 class="pb-4">Student Record (<?= $_GET['class'] ?>)</h4>
         </div>
     </div>
 
