@@ -28,10 +28,18 @@ $result = mysqli_query($link, $query);
     <!-- Menu Button  -->
     <div class=" mx-auto pt-3 mt-5">
         <div class="padding-left-5 p-4 d-flex  justify-content-around">
-            <button onclick="window.location.href = 'index.php';" type="button " class="button1 px-5 py-1 fw-bold">Home</button>
-            <button onclick="window.location.href = 'students.php';" type="button" class="button1 px-5 fw-bold">View Students</button>
+            <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
+            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>
             <button type="button" class="button1 px-5 fw-bold">Notifications</button>
-            <button type="button" class="button1 px-5 fw-bold">Settings</button>
+            <div class="dropdown">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    Settings
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold" href="#">Teacher Name</a>
+                    <a class="dropdown-item button1 fw-bold" href="#">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 

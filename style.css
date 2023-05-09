@@ -21,7 +21,7 @@ body {
 
 .center-div-dashboard{
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -33,6 +33,8 @@ body {
     background-color: #142640;
     border: 1px solid white;
     color: white;
+    height: 40px;
+    width: 180px;
 }
 
 .button2 {
