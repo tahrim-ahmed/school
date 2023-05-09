@@ -26,10 +26,18 @@ $result = mysqli_query($link, $query);
 <section class="container-fluid center-div-dashboard bkg w-75 text-white pb-5">
 
     <!-- Menu Button  -->
-    <div class=" mx-auto pt-3 mt-5">
+    <div class=" mx-auto pt-3">
         <div class="padding-left-5 p-4 d-flex  justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
-            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>
+            <div class="dropdown">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    View Students
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold" href="students.php">Class One</a>
+                </div>
+            </div>
+<!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
             <button type="button" class="button1 px-5 fw-bold">Notifications</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
@@ -54,8 +62,26 @@ $result = mysqli_query($link, $query);
             <h5 class="">You currently have:</h5>
             <h4 class="">3 Students</h4>
             <h5>Who are underperforming</h5>
-            <button class="btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">View Students</button><br>
-            <button onclick="window.location.href = 'records.php';" class="btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold" style="background-color: #ffffff; color: #142640;">View Record</button>
+
+<!--            view students and view record button -->
+            <div class="dropdown">
+                <button class="dropdown-toggle rounded p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    View Students
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold" href="students.php">Class One</a>
+                </div>
+            </div>
+<!--            <button class="btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">View Students</button><br>-->
+            <div class="dropdown">
+                <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                    View Record
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item button1 fw-bold" href="records.php">Class One</a>
+                </div>
+            </div>
+<!--            <button onclick="window.location.href = 'records.php';" class="btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold" style="background-color: #ffffff; color: #142640;">View Record</button>-->
         </div>
 
 

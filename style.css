@@ -41,6 +41,7 @@ body {
     width: 190px; /* set the desired width for the buttons */
     height: 45px; /* set the desired height for the buttons */
 }
+
 /* Vertical Line  */
 .row::before {
     content: "";
