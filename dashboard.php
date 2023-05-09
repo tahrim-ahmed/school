@@ -2,9 +2,18 @@
 include_once 'sys/config.php';
 include_once 'sys/database.php';
 
-$query = "SELECT * FROM `teacher`";
-$result = mysqli_query($link, $query);
+$user = getUser($_SESSION['user']->id);
+$user_id = $user->user_id;
 
+$get_user_by_id = $link->query("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
+$get_user = (object)$get_user_by_id->fetch_assoc();
+$get_teacher_id = $get_user->teacher_id;
+
+$get_teacher_by_teacher_id = $link->query("SELECT * FROM `teacher` WHERE `teacher_id` = '$get_teacher_id'");
+$get_teacher = (object)$get_teacher_by_teacher_id->fetch_assoc();
+
+$class_query = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result = mysqli_query($link, $class_query);
 
 ?>
 
@@ -34,7 +43,13 @@ $result = mysqli_query($link, $query);
                     View Students
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item button1 fw-bold" href="students.php">Class One</a>
+                    <?php
+            while ($class_row = mysqli_fetch_array($class_result)) {
+                ?>
+                <a class="dropdown-item button1 fw-bold" href="students.php"><?= $class_row["class_name"] ?></a>
+                <?php
+            }
+            ?>
                 </div>
             </div>
 <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
@@ -44,8 +59,8 @@ $result = mysqli_query($link, $query);
                     Settings
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item button1 fw-bold" href="#">Teacher Name</a>
-                    <a class="dropdown-item button1 fw-bold" href="#">Logout</a>
+                    <a class="dropdown-item button1 fw-bold"><?= $get_teacher->teacher_name ?></a>
+                    <a class="dropdown-item button1 fw-bold" href="logout.php">Logout</a>
                 </div>
             </div>
         </div>

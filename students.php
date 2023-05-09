@@ -131,7 +131,6 @@ $result = mysqli_query($link, $query);
             </thead>
             <tbody>
             <?php
-            $total = 0;
             while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr style="color: black">
