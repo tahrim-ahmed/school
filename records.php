@@ -120,7 +120,7 @@ $class_result = mysqli_query($link, $class_query);
                     <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
                     <td>
                         <button class="btn btn-sm px-2 py-1 ms-5 border border-success" data-toggle="modal" data-target="#modalRegisterForm3"><i class="fa fa-pencil"></i></button>
-                    </td>
+
                     <!--        Edit Student Modal -->
                     <div class="modal fade" id="modalRegisterForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <form class="modal-dialog" role="document">
@@ -147,6 +147,7 @@ $class_result = mysqli_query($link, $class_query);
                             </div>
                         </form>
                     </div>
+                    </td>
                 </tr>
                 <?php
             }
