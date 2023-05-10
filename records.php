@@ -104,7 +104,7 @@ $class_result = mysqli_query($link, $class_query);
                 <th class="px-2 text-center">Attendance</th>
                 <th class="px-2 text-center">Result</th>
                 <th class="px-2 text-center">Total</th>
-                <th class="px-2 text-center">Action</th>
+                <th class="px-2 text-center ml-3">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -119,8 +119,34 @@ $class_result = mysqli_query($link, $class_query);
                     <td class="px-2 text-center"><?= $row["result"] ?></td>
                     <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
                     <td>
-                        <button class="button1 px-2 py-1 fw-bold"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-sm px-2 py-1 ms-5 border border-success" data-toggle="modal" data-target="#modalRegisterForm3"><i class="fa fa-pencil"></i></button>
                     </td>
+                    <!--        Edit Student Modal -->
+                    <div class="modal fade" id="modalRegisterForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit Student Record</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body mx-3 text-black">
+                                    <div class="md-form mb-5">
+                                        <input type="number" id="first-name" class="form-control validate" required>
+                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="name">Attendance</label>
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <input type="number" id="sur-name" class="form-control validate" required>
+                                        <label class="level" data-success="right" for="sur-name">Result</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="button1 fw-bold">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </tr>
                 <?php
             }
