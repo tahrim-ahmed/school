@@ -38,7 +38,7 @@ $class_result = mysqli_query($link, $class_query);
           integrity="sha384/KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
 
-    <title><?= $_GET['class'] ?> Record</title>
+    <title><?= $_GET['class'] ?> Report</title>
 
     <script src="<?= base_url('property/vendors/jquery.min.js') ?>"></script>
     <script src="<?= base_url('property/vendors/popper.min.js') ?>"></script>
@@ -92,7 +92,7 @@ $class_result = mysqli_query($link, $class_query);
 
     <div class="d-flex align-items-center justify-content-between px-3">
         <div class="d-flex align-items-center justify-content-center">
-            <h4 class="pb-4">Student Record (<?= $_GET['class'] ?>)</h4>
+            <h4 class="pb-4">Student Report (<?= $_GET['class'] ?>)</h4>
         </div>
     </div>
 
@@ -108,7 +108,7 @@ $class_result = mysqli_query($link, $class_query);
                 <th class="px-2 text-center">Attendance</th>
                 <th class="px-2 text-center">Result</th>
                 <th class="px-2 text-center">Total</th>
-                <th class="px-2 text-center ml-3">Action</th>
+                <th class="px-2 text-center">Status</th>
             </tr>
             </thead>
             <tbody>
@@ -123,44 +123,7 @@ $class_result = mysqli_query($link, $class_query);
                     <td class="px-2 text-center"><?= $row["attendance"] ?></td>
                     <td class="px-2 text-center"><?= $row["result"] ?></td>
                     <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
-                    <td class="px-2 text-center">
-                        <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i class="fa fa-pencil"></i></button>
-
-                    <!--        Edit Student Record Modal -->
-                    <div class="modal fade" id="modalRegisterForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <form class="modal-dialog" role="document" method="POST" action="<?= base_url('edit/editRecord.php') ?>">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit Student Record</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body mx-3 text-black">
-                                    <div class="md-form mb-3">
-                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="id">Student ID</label>
-                                        <input type="text" id="update_id" name="update_id" class="form-control validate" required readonly>
-                                    </div>
-                                    <div class="md-form mb-3">
-                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="name">Full Name</label>
-                                        <input type="text" id="update_name" name="update_name" class="form-control validate" required readonly>
-                                    </div>
-                                    <div class="md-form mb-3">
-                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="attendance">Attendance</label>
-                                        <input type="text" id="update_attendance" name="update_attendance" class="form-control validate" required>
-                                    </div>
-                                    <div class="md-form mb-3">
-                                        <label class="level" data-success="right" for="result">Result</label>
-                                        <input type="text" id="update_result" name="update_result" class="form-control validate" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                    <button class="button1 fw-bold" type="submit">Update</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    </td>
+                    <td class="px-2 text-center"><?= ($row["attendance"] + $row["result"]) < 40 ? 'Underperforming' : 'Good' ?></td>
                 </tr>
                 <?php
             }
@@ -185,8 +148,9 @@ $class_result = mysqli_query($link, $class_query);
         var Table = $('#student_data').DataTable({
             'bServerSide': false,
             'ordering': false,
-            dom: '<"row"<"col"><"col-auto"f>>rt<"row"<"col"i><"col-auto"l>>p',
-            buttons: [{
+            dom: '<"row"<"col"B><"col-auto"f>>rt<"row"<"col"i><"col-auto"l>>p',
+            buttons: ['colvis',
+            {
                 extend: 'collection',
                 text: 'Export',
                 buttons: [{
@@ -219,31 +183,6 @@ $class_result = mysqli_query($link, $class_query);
                     }
                 ]
             }, ],
-        });
-    });
-
-    $(document).ready(function() {
-        $('.edit-button').on('click', function() {
-            $('#modalRegisterForm3').modal('show');
-
-            $tr = $(this).closest('tr');
-
-            var data = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
-
-            console.log(data);
-
-            $('#update_id').val(data[1]);
-            $('#update_name').val(data[2]+' '+data[3]);
-            $('#update_attendance').val(data[4]);
-            $('#update_result').val(data[5]);
-        });
-    });
-
-    $(document).ready(function() {
-        $('.close').on('click', function() {
-            $('#modalRegisterForm3').modal('hide');
         });
     });
 </script>

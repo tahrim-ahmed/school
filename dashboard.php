@@ -24,12 +24,16 @@ $class_result2 = mysqli_query($link, $class_query2);
 $class_query3 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result3 = mysqli_query($link, $class_query3);
 
+//for dropdown class in 'Generate Report' 
+$class_query4 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result4 = mysqli_query($link, $class_query4);
+
 //for counting underperforming student
 $count = 0;
 $underperform_query = "SELECT record.*, student.*, student_class.*, class.*, teacher_class.*, teacher.* FROM record INNER JOIN student ON record.student_id = student.student_id INNER JOIN student_class ON student.student_id = student_class.student_id INNER JOIN class ON student_class.class_id = class.class_id INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $underperform_result = mysqli_query($link, $underperform_query);
 while ($underperform_row = mysqli_fetch_array($underperform_result)) {
-    if(($underperform_row["attendance"] + $underperform_row["result"])<40) {
+    if (($underperform_row["attendance"] + $underperform_row["result"]) < 40) {
         $count++;
     }
 }
@@ -45,8 +49,9 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <!-- Bootstrap  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Document</title>
+    <link href="property/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384/KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -58,25 +63,30 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
         <div class="padding-left-5 p-4 d-flex  justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     View Students
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                     <?php
-            while ($class_row = mysqli_fetch_array($class_result)) {
-                ?>
-                <a class="dropdown-item button1 fw-bold" href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
-                                        <?= $class_row["class_name"] ?>
-                </a>
-                <?php
-            }
-            ?>
+                    while ($class_row = mysqli_fetch_array($class_result)) {
+                        ?>
+                        <a class="dropdown-item button1 fw-bold"
+                           href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
+                            <?= $class_row["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
-<!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
-            <button type="button" class="button1 px-5 fw-bold">Notifications</button>
+            <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
+            <button onclick="window.location.href = 'notification.php';" type="button" class="button1 px-5 fw-bold">
+                Notifications
+            </button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     Settings
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
@@ -99,41 +109,45 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
             <h4 class=""><?= $count ?> <?= $count == 1 ? 'Student' : 'Students' ?> </h4>
             <h5>Who are underperforming</h5>
 
-<!--            view students and view record button -->
+            <!--            view students and view record button -->
             <div class="dropdown">
-                <button class="dropdown-toggle rounded p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                <button class="dropdown-toggle rounded p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     View Students
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
                     <?php
-            while ($class_row2 = mysqli_fetch_array($class_result2)) {
-                ?>
-                <a class="dropdown-item button2 fw-bold" href="<?= base_url('students.php') ?>?class=<?= $class_row2["class_name"] ?>">
-                                        <?= $class_row2["class_name"] ?>
-                </a>
-                <?php
-            }
-            ?>
+                    while ($class_row2 = mysqli_fetch_array($class_result2)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('students.php') ?>?class=<?= $class_row2["class_name"] ?>">
+                            <?= $class_row2["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
-<!--            <button class="btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">View Students</button><br>-->
+            <!--            <button class="btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">View Students</button><br>-->
             <div class="dropdown">
-                <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
+                <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     View Record
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                     <?php
-            while ($class_row3 = mysqli_fetch_array($class_result3)) {
-                ?>
-                <a class="dropdown-item button2 fw-bold" href="<?= base_url('records.php') ?>?class=<?= $class_row3["class_name"] ?>">
-                                        <?= $class_row3["class_name"] ?>
-                </a>
-                <?php
-            }
-            ?>
+                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('records.php') ?>?class=<?= $class_row3["class_name"] ?>">
+                            <?= $class_row3["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
-<!--            <button onclick="window.location.href = 'records.php';" class="btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold" style="background-color: #ffffff; color: #142640;">View Record</button>-->
+            <!--            <button onclick="window.location.href = 'records.php';" class="btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold" style="background-color: #ffffff; color: #142640;">View Record</button>-->
         </div>
 
 
@@ -141,16 +155,43 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
             <div class="h4" id="datetime"><?php echo date('l jS, F Y'); ?>
             </div>
             <div class="ps-4 p-3 border border-white text-center">
-                <button class="button2 btn btn-outline-dark btn-lg btn-block mb-3 fw-bold px-5" style="background-color: #ffffff; color: #142640;">Help</button><br>
-                <button class="button2 btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold px-4" style="background-color: #ffffff; color: #142640;">Support</button><br>
-                <button onclick="window.location.href = 'records.php';" class="text-small btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">Generate Report</button>
+                <button onclick="window.location.href = 'help.php';"
+                        class="button2 btn btn-outline-dark btn-lg btn-block mb-3 fw-bold px-5"
+                        style="background-color: #ffffff; color: #142640;">Help
+                </button>
+                <br>
+                <button onclick="window.location.href = 'support.php';"
+                        class="button2 btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold px-4"
+                        style="background-color: #ffffff; color: #142640;">Support
+                </button>
+                <br>
+                <div class="dropdown">
+                <button class="dropdown-toggle rounded btn-lg btn-block mb-3 px-4 fw-bold px-4 py-2" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                    Generate Report
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                    <?php
+                    while ($class_row4 = mysqli_fetch_array($class_result4)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('report.php') ?>?class=<?= $class_row4["class_name"] ?>">
+                            <?= $class_row4["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
             </div>
         </div>
 
     </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="property/bootstrap/js/bootstrap.bundle.min.js"
+        integrity="sha384/ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
