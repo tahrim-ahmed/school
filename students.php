@@ -76,7 +76,7 @@ $get_class = $link->query("SELECT class.*, teacher_class.*, teacher.* FROM class
                 </div>
             </div>
             <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
-            <button type="button" class="button1 px-5 fw-bold">Notifications</button>
+            <button onclick="window.location.href = 'notification.php';" type="button" class="button1 px-5 fw-bold">Notifications</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     Settings

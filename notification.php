@@ -20,7 +20,7 @@ $class_result = mysqli_query($link, $class_query);
 $class_query2 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result2 = mysqli_query($link, $class_query2);
 
-//for dropdown class in 'View Record' 
+//for dropdown class in 'View Record'
 $class_query3 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result3 = mysqli_query($link, $class_query3);
 
@@ -63,17 +63,17 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                     <?php
-            while ($class_row = mysqli_fetch_array($class_result)) {
-                ?>
-                <a class="dropdown-item button1 fw-bold" href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
-                                        <?= $class_row["class_name"] ?>
-                </a>
-                <?php
-            }
-            ?>
+                    while ($class_row = mysqli_fetch_array($class_result)) {
+                        ?>
+                        <a class="dropdown-item button1 fw-bold" href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
+                            <?= $class_row["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
-<!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
+            <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
             <button onclick="window.location.href = 'notification.php';" type="button" class="button1 px-5 fw-bold">Notifications</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
@@ -88,65 +88,12 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
     </div>
 
     <!-- Welcome Message  -->
-    <div class="d-flex align-items-center justify-content-center">
-        <h3 class="pb-4">Welcome Back</h3>
+    <div class="d-flex align-items-center justify-content-center pt-5">
+        <h3 class="pb-4">There are no notifications available at this time.</h3>
     </div>
 
     <!-- Main Dashboard  -->
     <div class="d-flex align-items-center  justify-content-around">
-        <div class="border border-white p-3 text-center">
-            <h5 class="">You currently have:</h5>
-            <h4 class=""><?= $count ?> <?= $count == 1 ? 'Student' : 'Students' ?> </h4>
-            <h5>Who are underperforming</h5>
-
-<!--            view students and view record button -->
-            <div class="dropdown">
-                <button class="dropdown-toggle rounded p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
-                    View Students
-                </button>
-                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
-                    <?php
-            while ($class_row2 = mysqli_fetch_array($class_result2)) {
-                ?>
-                <a class="dropdown-item button2 fw-bold" href="<?= base_url('students.php') ?>?class=<?= $class_row2["class_name"] ?>">
-                                        <?= $class_row2["class_name"] ?>
-                </a>
-                <?php
-            }
-            ?>
-                </div>
-            </div>
-<!--            <button class="btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">View Students</button><br>-->
-            <div class="dropdown">
-                <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false"  >
-                    View Record
-                </button>
-                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                    <?php
-            while ($class_row3 = mysqli_fetch_array($class_result3)) {
-                ?>
-                <a class="dropdown-item button2 fw-bold" href="<?= base_url('records.php') ?>?class=<?= $class_row3["class_name"] ?>">
-                                        <?= $class_row3["class_name"] ?>
-                </a>
-                <?php
-            }
-            ?>
-                </div>
-            </div>
-<!--            <button onclick="window.location.href = 'records.php';" class="btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold" style="background-color: #ffffff; color: #142640;">View Record</button>-->
-        </div>
-
-
-        <div class="">
-            <div class="h4" id="datetime"><?php echo date('l jS, F Y'); ?>
-            </div>
-            <div class="ps-4 p-3 border border-white text-center">
-                <button class="button2 btn btn-outline-dark btn-lg btn-block mb-3 fw-bold px-5" style="background-color: #ffffff; color: #142640;">Help</button><br>
-                <button class="button2 btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold px-4" style="background-color: #ffffff; color: #142640;">Support</button><br>
-                <button onclick="window.location.href = 'records.php';" class="text-small btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">Generate Report</button>
-            </div>
-        </div>
-
     </div>
 </section>
 
