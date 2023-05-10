@@ -16,23 +16,6 @@ $get_teacher = (object)$get_teacher_by_teacher_id->fetch_assoc();
 $class_query = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result = mysqli_query($link, $class_query);
 
-//for dropdown class in 'View Student'
-$class_query2 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
-$class_result2 = mysqli_query($link, $class_query2);
-
-//for dropdown class in 'View Record'
-$class_query3 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
-$class_result3 = mysqli_query($link, $class_query3);
-
-//for counting underperforming student
-$count = 0;
-$underperform_query = "SELECT record.*, student.*, student_class.*, class.*, teacher_class.*, teacher.* FROM record INNER JOIN student ON record.student_id = student.student_id INNER JOIN student_class ON student.student_id = student_class.student_id INNER JOIN class ON student_class.class_id = class.class_id INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
-$underperform_result = mysqli_query($link, $underperform_query);
-while ($underperform_row = mysqli_fetch_array($underperform_result)) {
-    if (($underperform_row["attendance"] + $underperform_row["result"]) < 40) {
-        $count++;
-    }
-}
 
 ?>
 
