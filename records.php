@@ -35,7 +35,7 @@ $class_result = mysqli_query($link, $class_query);
 
     <!-- Bootstrap  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Document</title>
+    <title><?= $_GET['class'] ?> Record</title>
 
     <script src="<?= base_url('property/vendors/jquery.min.js') ?>"></script>
     <script src="<?= base_url('property/vendors/popper.min.js') ?>"></script>
@@ -123,7 +123,7 @@ $class_result = mysqli_query($link, $class_query);
                     </td>
                     <!--        Edit Student Modal -->
                     <div class="modal fade" id="modalRegisterForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                        <form class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit Student Record</h4>
@@ -145,7 +145,7 @@ $class_result = mysqli_query($link, $class_query);
                                     <button class="button1 fw-bold">Confirm</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </tr>
                 <?php
