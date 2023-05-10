@@ -24,6 +24,10 @@ $class_result2 = mysqli_query($link, $class_query2);
 $class_query3 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result3 = mysqli_query($link, $class_query3);
 
+//for dropdown class in 'Generate Report' 
+$class_query4 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result4 = mysqli_query($link, $class_query4);
+
 //for counting underperforming student
 $count = 0;
 $underperform_query = "SELECT record.*, student.*, student_class.*, class.*, teacher_class.*, teacher.* FROM record INNER JOIN student ON record.student_id = student.student_id INNER JOIN student_class ON student.student_id = student_class.student_id INNER JOIN class ON student_class.class_id = class.class_id INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
@@ -161,10 +165,24 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
                         style="background-color: #ffffff; color: #142640;">Support
                 </button>
                 <br>
-                <button onclick="window.location.href = 'records.php';"
-                        class="text-small btn dropdown-toggle btn-outline-dark btn-lg btn-block mb-3 fw-bold px-2"
-                        style="background-color: #ffffff; color: #142640;">Generate Report
+                <div class="dropdown">
+                <button class="dropdown-toggle rounded btn-lg btn-block mb-3 px-4 fw-bold px-4 py-2" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                    Generate Report
                 </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                    <?php
+                    while ($class_row4 = mysqli_fetch_array($class_result4)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('report.php') ?>?class=<?= $class_row4["class_name"] ?>">
+                            <?= $class_row4["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
             </div>
         </div>
 

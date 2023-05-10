@@ -202,7 +202,7 @@ if (isset($_POST['first_name'])) {
                 <th class="px-5 text-center" scope="col">First Name</th>
                 <th class="px-5 text-center" scope="col">Surname</th>
                 <th class="px-5 text-center" scope="col">Date of Birth</th>
-                <th class="px-5" scope="col">Action</th>
+                <th class="px-5 text-center" scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -214,12 +214,11 @@ if (isset($_POST['first_name'])) {
                     <td class="px-5 text-center"><?= $row["first_name"] ?></td>
                     <td class="px-5 text-center"><?= $row["sur_name"] ?></td>
                     <td class="px-5 text-center"><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
-                    <td class="px-5">
+                    <td class="px-2 text-center">
 
                         <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i
                                 class="fa fa-pencil"></i></button>
-                        <button class="btn btn-sm px-2 py-1 border border-danger" data-toggle="modal"
-                                data-target="#delete"><i class="fa fa-trash"></i></button>
+                        <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>" class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
 
 
                         <!--        Edit Student Modal -->
@@ -269,27 +268,6 @@ if (isset($_POST['first_name'])) {
                             </form>
                         </div>
 
-
-                        <!--                        Delete Student Modal -->
-                        <div class="modal fade" id="delete" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title mx-auto" id="exampleModalLabel">Confirm Delete
-                                            Student!</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-footer mx-auto">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="button" class="btn btn-danger">Confirm</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </td>
                 </tr>
                 <?php
