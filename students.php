@@ -156,7 +156,7 @@ if (isset($_POST['first_name'])) {
                         </button>
                     </div>
                     <div class="modal-body mx-3 text-black">
-                        <div class="md-form mb-5">
+                        <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-name">Select Class</label>
                             <select name="class_id" class="form-control" id="searchPurpose">
                                 <?php
@@ -169,16 +169,16 @@ if (isset($_POST['first_name'])) {
                                 ?>
                             </select>
                         </div>
-                        <div class="md-form mb-5">
+                        <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-name">First Name</label>
                             <input type="text" name="first_name" id="first-name" class="form-control validate" required>
                         </div>
-                        <div class="md-form mb-5">
+                        <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-email">Surname</label>
                             <input type="text" name="sur_name" id="sur-name" class="form-control validate" required>
                         </div>
 
-                        <div class="md-form mb-4">
+                        <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-pass">Date of Birth</label>
                             <input type="date" name="date_of_birth" id="date-of-birth" class="form-control validate"
                                    required>
