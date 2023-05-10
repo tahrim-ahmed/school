@@ -209,7 +209,7 @@ if ($link->query($add_student_sql)) {
 
                         <!--        Edit Student Modal -->
                         <div class="modal fade" id="modalRegisterForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <form class="modal-dialog" role="document">
+                            <form class="modal-dialog" role="document" action="<?= base_url('edit/editStudent.php') ?>" method="POST">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit Student Information</h4>
@@ -218,22 +218,22 @@ if ($link->query($add_student_sql)) {
                                         </button>
                                     </div>
                                     <div class="modal-body mx-3 text-black">
-                                        <div class="md-form mb-5">
-                                            <input type="text" id="update_id" name="update_id" class="form-control validate" required disabled>
+                                        <div class="md-form mb-3">
                                             <label style="text-align: left;" data-error="wrong" data-success="right" for="id">Student ID</label>
+                                            <input type="text" id="update_id" name="update_id" class="form-control validate" required readonly>
                                         </div>
-                                        <div class="md-form mb-5">
-                                            <input type="text" id="update_first_name" name="update_first_name" class="form-control validate" required>
+                                        <div class="md-form mb-3">
                                             <label style="text-align: left;" data-error="wrong" data-success="right" for="name">First Name</label>
+                                            <input type="text" id="update_first_name" name="update_first_name" class="form-control validate" required>
                                         </div>
-                                        <div class="md-form mb-5">
-                                            <input type="text" id="update_sur_name" name="update_sur_name" class="form-control validate" required>
+                                        <div class="md-form mb-3">
                                             <label class="level" data-success="right" for="sur-name">Surname</label>
+                                            <input type="text" id="update_sur_name" name="update_sur_name" class="form-control validate" required>
                                         </div>
 
-                                        <div class="md-form mb-4">
-                                            <input type="date" id="update_date_of_birth" name="update_date_of_birth" class="form-control validate" required>
+                                        <div class="md-form mb-3">
                                             <label data-error="wrong" data-success="right" for="date-of-birth">Date of Birth</label>
+                                            <input type="date" id="update_date_of_birth" name="update_date_of_birth" class="form-control validate" required>
                                         </div>
 
                                     </div>
@@ -334,12 +334,12 @@ if ($link->query($add_student_sql)) {
                 return $(this).text();
             }).get();
 
-            console.log(data);
+            console.log(data[3]);
 
             $('#update_id').val(data[0]);
             $('#update_first_name').val(data[1]);
             $('#update_sur_name').val(data[2]);
-            $('#update_date_of_birth').val(data[3]);
+            $('#update_date_of_birth').val(moment(data[3]).format('YYYY-MM-DD'));
         });
     });
 

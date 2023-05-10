@@ -99,6 +99,7 @@ $class_result = mysqli_query($link, $class_query);
             <thead style="color: black">
             <tr class="px-2">
                 <th class="px-2 text-center">▢</th>
+                <th class="px-2 text-center">Student ID</th>
                 <th class="px-2 text-center">First Name</th>
                 <th class="px-2 text-center">Surname</th>
                 <th class="px-2 text-center">Attendance</th>
@@ -113,17 +114,18 @@ $class_result = mysqli_query($link, $class_query);
                 ?>
                 <tr>
                     <td class="px-2 text-center" style="color: <?= ($row["attendance"] + $row["result"]) < 40 ? 'red' : 'green' ?>;">■</td>
+                    <td class="px-2 text-center"><?= $row["student_id"] ?></td>
                     <td class="px-2 text-center"><?= $row["first_name"] ?></td>
                     <td class="px-2 text-center"><?= $row["sur_name"] ?></td>
                     <td class="px-2 text-center"><?= $row["attendance"] ?></td>
                     <td class="px-2 text-center"><?= $row["result"] ?></td>
                     <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
                     <td>
-                        <button class="btn btn-sm px-2 py-1 ms-5 border border-success" data-toggle="modal" data-target="#modalRegisterForm3"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i class="fa fa-pencil"></i></button>
 
-                    <!--        Edit Student Modal -->
+                    <!--        Edit Student Record Modal -->
                     <div class="modal fade" id="modalRegisterForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <form class="modal-dialog" role="document">
+                        <form class="modal-dialog" role="document" method="POST" action="<?= base_url('edit/editRecord.php') ?>">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit Student Record</h4>
@@ -132,17 +134,25 @@ $class_result = mysqli_query($link, $class_query);
                                     </button>
                                 </div>
                                 <div class="modal-body mx-3 text-black">
-                                    <div class="md-form mb-5">
-                                        <input type="number" id="first-name" class="form-control validate" required>
-                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="name">Attendance</label>
+                                    <div class="md-form mb-3">
+                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="id">Student ID</label>
+                                        <input type="text" id="update_id" name="update_id" class="form-control validate" required readonly>
                                     </div>
-                                    <div class="md-form mb-5">
-                                        <input type="number" id="sur-name" class="form-control validate" required>
-                                        <label class="level" data-success="right" for="sur-name">Result</label>
+                                    <div class="md-form mb-3">
+                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="name">Full Name</label>
+                                        <input type="text" id="update_name" name="update_name" class="form-control validate" required readonly>
+                                    </div>
+                                    <div class="md-form mb-3">
+                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="attendance">Attendance</label>
+                                        <input type="text" id="update_attendance" name="update_attendance" class="form-control validate" required>
+                                    </div>
+                                    <div class="md-form mb-3">
+                                        <label class="level" data-success="right" for="result">Result</label>
+                                        <input type="text" id="update_result" name="update_result" class="form-control validate" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
-                                    <button class="button1 fw-bold">Confirm</button>
+                                    <button class="button1 fw-bold" type="submit">Update</button>
                                 </div>
                             </div>
                         </form>
@@ -204,6 +214,31 @@ $class_result = mysqli_query($link, $class_query);
                     }
                 ]
             }, ],
+        });
+    });
+
+    $(document).ready(function() {
+        $('.edit-button').on('click', function() {
+            $('#modalRegisterForm3').modal('show');
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+
+            console.log(data);
+
+            $('#update_id').val(data[1]);
+            $('#update_name').val(data[2]+' '+data[3]);
+            $('#update_attendance').val(data[4]);
+            $('#update_result').val(data[5]);
+        });
+    });
+
+    $(document).ready(function() {
+        $('.close').on('click', function() {
+            $('#modalRegisterForm3').modal('hide');
         });
     });
 </script>
