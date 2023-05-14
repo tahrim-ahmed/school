@@ -99,7 +99,7 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
 
     <!-- Welcome Message  -->
     <div class="d-flex align-items-center justify-content-center">
-        <h3 class="pb-4">Welcome Back</h3>
+        <h3 class="pb-4">Welcome Back, <span style="color: aqua;"><?= $get_teacher->teacher_name ?></span></h3>
     </div>
 
     <!-- Main Dashboard  -->
