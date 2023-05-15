@@ -103,7 +103,7 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
     </div>
 
     <!-- Main Dashboard  -->
-    <div class="d-flex align-items-center  justify-content-around">
+    <div class="d-flex align-items-center justify-content-around p-5">
         <div class="border border-white p-3 text-center">
             <h5 class="">You currently have:</h5>
             <h4 class=""><?= $count ?> <?= $count == 1 ? 'Student' : 'Students' ?> </h4>
