@@ -60,30 +60,45 @@ $class_result = mysqli_query($link, $class_query);
                 </div>
             </div>
             <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
-            <button onclick="window.location.href = 'notification.php';" type="button" class="button1 px-5 fw-bold">
-                Notifications
-            </button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
+                <button class="button1 dropdown-toggle fw-bold text-center" type="button" id="dropdownMenuButton"
                         data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
-                    Settings
+                    Student progression
                 </button>
-                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item button1 fw-bold"><?= $get_teacher->teacher_name ?></a>
-                    <a class="dropdown-item button1 fw-bold" href="logout.php">Logout</a>
+                <!--                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">-->
+                <!--                    --><?php
+                //                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
+                //                        ?>
+                <!--                        <a class="dropdown-item button2 fw-bold"-->
+                <!--                           href="--><?php //= base_url('records.php') ?><!--?class=--><?php //= $class_row3["class_name"] ?><!--">-->
+                <!--                            --><?php //= $class_row3["class_name"] ?>
+                <!--                        </a>-->
+                <!--                        --><?php
+                //                    }
+                //                    ?>
+                <!--                </div>-->
+            </div>
+            <div class="dropdown">
+                    <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
+                            data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </button>
+                    <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item button1 fw-bold"><?= $get_teacher->teacher_name ?></a>
+                        <a class="dropdown-item button1 fw-bold" href="logout.php">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Welcome Message  -->
-    <div class="d-flex align-items-center justify-content-center pt-5">
-        <h3 class="pb-4"> Please Contact the Administrator.</h3>
-    </div>
+        <!-- Welcome Message  -->
+        <div class="d-flex align-items-center justify-content-center pt-5">
+            <h3 class="pb-4"> Please Contact the Administrator.</h3>
+        </div>
 
-    <!-- Main Dashboard  -->
-    <div class="d-flex align-items-center  justify-content-around">
-    </div>
+        <!-- Main Dashboard  -->
+        <div class="d-flex align-items-center  justify-content-around">
+        </div>
 </section>
 
 <script src="property/bootstrap/js/bootstrap.bundle.min.js"

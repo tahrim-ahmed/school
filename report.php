@@ -29,7 +29,8 @@ $class_result = mysqli_query($link, $class_query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/autocomplete/style.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/datatables/dataTables.bootstrap4.min.css') ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?= base_url('property/vendors/datatables/dataTables.bootstrap4.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/select2/select2.min.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -61,25 +62,45 @@ $class_result = mysqli_query($link, $class_query);
         <div class="padding-left-5 p-4 d-flex justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     View Students
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                     <?php
-            while ($class_row = mysqli_fetch_array($class_result)) {
-                ?>
-                <a class="dropdown-item button1 fw-bold" href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
-                                        <?= $class_row["class_name"] ?>
-                </a>
-                <?php
-            }
-            ?>
+                    while ($class_row = mysqli_fetch_array($class_result)) {
+                        ?>
+                        <a class="dropdown-item button1 fw-bold"
+                           href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
+                            <?= $class_row["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
             <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
-            <button onclick="window.location.href = 'notification.php';" type="button" class="button1 px-5 fw-bold">Notifications</button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                <button class="button1 dropdown-toggle fw-bold text-center" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                    Student progression
+                </button>
+                <!--                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">-->
+                <!--                    --><?php
+                //                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
+                //                        ?>
+                <!--                        <a class="dropdown-item button2 fw-bold"-->
+                <!--                           href="--><?php //= base_url('records.php') ?><!--?class=--><?php //= $class_row3["class_name"] ?><!--">-->
+                <!--                            --><?php //= $class_row3["class_name"] ?>
+                <!--                        </a>-->
+                <!--                        --><?php
+                //                    }
+                //                    ?>
+                <!--                </div>-->
+            </div>
+            <div class="dropdown">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     Settings
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
@@ -116,7 +137,9 @@ $class_result = mysqli_query($link, $class_query);
             while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr>
-                    <td class="px-2 text-center" style="color: <?= ($row["attendance"] + $row["result"]) < 40 ? 'red' : 'green' ?>;">■</td>
+                    <td class="px-2 text-center"
+                        style="color: <?= ($row["attendance"] + $row["result"]) < 40 ? 'red' : 'green' ?>;">■
+                    </td>
                     <td class="px-2 text-center"><?= $row["student_id"] ?></td>
                     <td class="px-2 text-center"><?= $row["first_name"] ?></td>
                     <td class="px-2 text-center"><?= $row["sur_name"] ?></td>
@@ -144,45 +167,45 @@ $class_result = mysqli_query($link, $class_query);
 </body>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var Table = $('#student_data').DataTable({
             'bServerSide': false,
             'ordering': false,
             dom: '<"row"<"col"B><"col-auto"f>>rt<"row"<"col"i><"col-auto"l>>p',
             buttons: ['colvis',
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [{
-                    extend: 'csv',
-                    text: 'Export as Csv',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                    {
-                        extend: 'excel',
-                        text: 'Export as Excel',
+                {
+                    extend: 'collection',
+                    text: 'Export',
+                    buttons: [{
+                        extend: 'csv',
+                        text: 'Export as Csv',
                         exportOptions: {
                             columns: ':visible'
                         }
                     },
-                    {
-                        extend: 'pdf',
-                        text: 'Export as PDF',
-                        exportOptions: {
-                            columns: ':visible'
+                        {
+                            extend: 'excel',
+                            text: 'Export as Excel',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            text: 'Export as PDF',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            text: 'Print',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
                         }
-                    },
-                    {
-                        extend: 'print',
-                        text: 'Print',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    }
-                ]
-            }, ],
+                    ]
+                },],
         });
     });
 </script>

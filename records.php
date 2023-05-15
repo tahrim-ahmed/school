@@ -29,7 +29,8 @@ $class_result = mysqli_query($link, $class_query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/autocomplete/style.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/datatables/dataTables.bootstrap4.min.css') ?>">
+    <link rel="stylesheet" type="text/css"
+          href="<?= base_url('property/vendors/datatables/dataTables.bootstrap4.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('property/vendors/select2/select2.min.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -61,25 +62,46 @@ $class_result = mysqli_query($link, $class_query);
         <div class="padding-left-5 p-4 d-flex justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     View Students
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                     <?php
-            while ($class_row = mysqli_fetch_array($class_result)) {
-                ?>
-                <a class="dropdown-item button1 fw-bold" href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
-                                        <?= $class_row["class_name"] ?>
-                </a>
-                <?php
-            }
-            ?>
+                    while ($class_row = mysqli_fetch_array($class_result)) {
+                        ?>
+                        <a class="dropdown-item button1 fw-bold"
+                           href="<?= base_url('students.php') ?>?class=<?= $class_row["class_name"] ?>">
+                            <?= $class_row["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
             <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
-            <button onclick="window.location.href = 'notification.php';" type="button" class="button1 px-5 fw-bold">Notifications</button>
             <div class="dropdown">
-                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                <button class="button1 dropdown-toggle fw-bold text-center" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                    Student progression
+                </button>
+                <!--                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">-->
+                <!--                    --><?php
+                //                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
+                //                        ?>
+                <!--                        <a class="dropdown-item button2 fw-bold"-->
+                <!--                           href="--><?php //= base_url('records.php') ?><!--?class=--><?php //= $class_row3["class_name"] ?><!--">-->
+                <!--                            --><?php //= $class_row3["class_name"] ?>
+                <!--                        </a>-->
+                <!--                        --><?php
+                //                    }
+                //                    ?>
+                <!--                </div>-->
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     Settings
                 </button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
@@ -116,7 +138,9 @@ $class_result = mysqli_query($link, $class_query);
             while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr>
-                    <td class="px-2 text-center" style="color: <?= ($row["attendance"] + $row["result"]) < 40 ? 'red' : 'green' ?>;">■</td>
+                    <td class="px-2 text-center"
+                        style="color: <?= ($row["attendance"] + $row["result"]) < 40 ? 'red' : 'green' ?>;">■
+                    </td>
                     <td class="px-2 text-center"><?= $row["student_id"] ?></td>
                     <td class="px-2 text-center"><?= $row["first_name"] ?></td>
                     <td class="px-2 text-center"><?= $row["sur_name"] ?></td>
@@ -124,44 +148,55 @@ $class_result = mysqli_query($link, $class_query);
                     <td class="px-2 text-center"><?= $row["result"] ?></td>
                     <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
                     <td class="px-2 text-center">
-                        <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i
+                                class="fa fa-pencil"></i></button>
                         <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>"
                            class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
 
-                    <!--        Edit Student Record Modal -->
-                    <div class="modal fade" id="modalRegisterForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <form class="modal-dialog" role="document" method="POST" action="<?= base_url('edit/editRecord.php') ?>">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit Student Record</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                        <!--        Edit Student Record Modal -->
+                        <div class="modal fade" id="modalRegisterForm3" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <form class="modal-dialog" role="document" method="POST"
+                                  action="<?= base_url('edit/editRecord.php') ?>">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit
+                                            Student Record</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body mx-3 text-black">
+                                        <div class="md-form mb-3">
+                                            <label style="text-align: left;" data-error="wrong" data-success="right"
+                                                   for="id">Student ID</label>
+                                            <input type="text" id="update_id" name="update_id"
+                                                   class="form-control validate" required readonly>
+                                        </div>
+                                        <div class="md-form mb-3">
+                                            <label style="text-align: left;" data-error="wrong" data-success="right"
+                                                   for="name">Full Name</label>
+                                            <input type="text" id="update_name" name="update_name"
+                                                   class="form-control validate" required readonly>
+                                        </div>
+                                        <div class="md-form mb-3">
+                                            <label style="text-align: left;" data-error="wrong" data-success="right"
+                                                   for="attendance">Attendance</label>
+                                            <input type="text" id="update_attendance" name="update_attendance"
+                                                   class="form-control validate" required>
+                                        </div>
+                                        <div class="md-form mb-3">
+                                            <label class="level" data-success="right" for="result">Result</label>
+                                            <input type="text" id="update_result" name="update_result"
+                                                   class="form-control validate" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <button class="button1 fw-bold" type="submit">Update</button>
+                                    </div>
                                 </div>
-                                <div class="modal-body mx-3 text-black">
-                                    <div class="md-form mb-3">
-                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="id">Student ID</label>
-                                        <input type="text" id="update_id" name="update_id" class="form-control validate" required readonly>
-                                    </div>
-                                    <div class="md-form mb-3">
-                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="name">Full Name</label>
-                                        <input type="text" id="update_name" name="update_name" class="form-control validate" required readonly>
-                                    </div>
-                                    <div class="md-form mb-3">
-                                        <label style="text-align: left;" data-error="wrong" data-success="right" for="attendance">Attendance</label>
-                                        <input type="text" id="update_attendance" name="update_attendance" class="form-control validate" required>
-                                    </div>
-                                    <div class="md-form mb-3">
-                                        <label class="level" data-success="right" for="result">Result</label>
-                                        <input type="text" id="update_result" name="update_result" class="form-control validate" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                    <button class="button1 fw-bold" type="submit">Update</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 <?php
@@ -183,7 +218,7 @@ $class_result = mysqli_query($link, $class_query);
 </body>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var Table = $('#student_data').DataTable({
             'bServerSide': false,
             'ordering': false,
@@ -220,31 +255,31 @@ $class_result = mysqli_query($link, $class_query);
                         }
                     }
                 ]
-            }, ],
+            },],
         });
     });
 
-    $(document).ready(function() {
-        $('.edit-button').on('click', function() {
+    $(document).ready(function () {
+        $('.edit-button').on('click', function () {
             $('#modalRegisterForm3').modal('show');
 
             $tr = $(this).closest('tr');
 
-            var data = $tr.children("td").map(function() {
+            var data = $tr.children("td").map(function () {
                 return $(this).text();
             }).get();
 
             console.log(data);
 
             $('#update_id').val(data[1]);
-            $('#update_name').val(data[2]+' '+data[3]);
+            $('#update_name').val(data[2] + ' ' + data[3]);
             $('#update_attendance').val(data[4]);
             $('#update_result').val(data[5]);
         });
     });
 
-    $(document).ready(function() {
-        $('.close').on('click', function() {
+    $(document).ready(function () {
+        $('.close').on('click', function () {
             $('#modalRegisterForm3').modal('hide');
         });
     });
