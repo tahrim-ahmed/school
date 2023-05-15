@@ -93,7 +93,7 @@ $class_result2 = mysqli_query($link, $class_query2);
                     while ($class_row2 = mysqli_fetch_array($class_result2)) {
                         ?>
                         <a class="dropdown-item button2 fw-bold"
-                           href="<?= base_url('students.php') ?>?class=<?= $class_row2["class_name"] ?>">
+                           href="<?= base_url('records.php') ?>?class=<?= $class_row2["class_name"] ?>">
                             <?= $class_row2["class_name"] ?>
                         </a>
                         <?php

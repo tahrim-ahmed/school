@@ -95,7 +95,7 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
                     while ($class_row5 = mysqli_fetch_array($class_result5)) {
                         ?>
                         <a class="dropdown-item button2 fw-bold"
-                           href="<?= base_url('students.php') ?>?class=<?= $class_row5["class_name"] ?>">
+                           href="<?= base_url('records.php') ?>?class=<?= $class_row5["class_name"] ?>">
                             <?= $class_row5["class_name"] ?>
                         </a>
                         <?php

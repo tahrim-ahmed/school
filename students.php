@@ -32,6 +32,8 @@ if (isset($_POST['first_name'])) {
     $first_name = mysqli_real_escape_string($link, $_REQUEST['first_name']);
     $sur_name = mysqli_real_escape_string($link, $_REQUEST['sur_name']);
     $date_of_birth = mysqli_real_escape_string($link, $_REQUEST['date_of_birth']);
+    $attendance = mysqli_real_escape_string($link, $_REQUEST['attendance']);
+    $performance_score = mysqli_real_escape_string($link, $_REQUEST['performance_score']);
 
     $add_student_sql = "INSERT INTO student (first_name, sur_name, date_of_birth) VALUES ('$first_name', '$sur_name', '$date_of_birth')";
 
@@ -44,7 +46,7 @@ if (isset($_POST['first_name'])) {
             $add_student_class = "INSERT INTO student_class (class_id, student_id) VALUES ('$class_id', '$get_student_id')";
 
             if ($link->query($add_student_class)) {
-                $add_student_record = "INSERT INTO record (student_id, attendance, result) VALUES ('$get_student_id', 0, 0)";
+                $add_student_record = "INSERT INTO record (student_id, attendance, result) VALUES ('$get_student_id', '$attendance', '$performance_score')";
 
                 if ($link->query($add_student_record)) {
                     setMessage('Added Successfully', 'success');
@@ -132,7 +134,7 @@ if (isset($_POST['first_name'])) {
                     while ($class_row2 = mysqli_fetch_array($class_result2)) {
                         ?>
                         <a class="dropdown-item button2 fw-bold"
-                           href="<?= base_url('students.php') ?>?class=<?= $class_row2["class_name"] ?>">
+                           href="<?= base_url('records.php') ?>?class=<?= $class_row2["class_name"] ?>">
                             <?= $class_row2["class_name"] ?>
                         </a>
                         <?php
@@ -203,6 +205,16 @@ if (isset($_POST['first_name'])) {
                             <label data-error="wrong" data-success="right" for="orangeForm-pass">Date of Birth</label>
                             <input type="date" name="date_of_birth" id="date-of-birth" class="form-control validate"
                                    required>
+                        </div>
+
+                        <div class="md-form mb-3">
+                            <label data-error="wrong" data-success="right" for="orangeForm-email">Attendance Score</label>
+                            <input type="number" name="attendance" id="attendance" class="form-control validate" required>
+                        </div>
+
+                        <div class="md-form mb-3">
+                            <label data-error="wrong" data-success="right" for="orangeForm-email">Performance Score</label>
+                            <input type="number" name="performance_score" id="performance_score" class="form-control validate" required>
                         </div>
 
                     </div>
