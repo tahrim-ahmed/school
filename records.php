@@ -125,6 +125,8 @@ $class_result = mysqli_query($link, $class_query);
                     <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
                     <td class="px-2 text-center">
                         <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i class="fa fa-pencil"></i></button>
+                        <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>"
+                           class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
 
                     <!--        Edit Student Record Modal -->
                     <div class="modal fade" id="modalRegisterForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
