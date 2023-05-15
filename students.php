@@ -171,11 +171,13 @@ if (isset($_POST['first_name'])) {
                         </div>
                         <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-name">First Name</label>
-                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters." name="first_name" id="first-name" class="form-control validate" required>
+                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters."
+                                   name="first_name" id="first-name" class="form-control validate" required>
                         </div>
                         <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-email">Surname</label>
-                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters." name="sur_name" id="sur-name" class="form-control validate" required>
+                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters."
+                                   name="sur_name" id="sur-name" class="form-control validate" required>
                         </div>
 
                         <div class="md-form mb-3">
@@ -218,7 +220,8 @@ if (isset($_POST['first_name'])) {
 
                         <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i
                                 class="fa fa-pencil"></i></button>
-                        <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>" class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
+                        <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>"
+                           class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
 
 
                         <!--        Edit Student Modal -->

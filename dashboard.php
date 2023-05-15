@@ -129,7 +129,7 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
                 </div>
             </div>
             <!--            <button class="btn btn-outline-dark btn-lg btn-block mb-3 fw-bold" style="background-color: #ffffff; color: #142640;">View Students</button><br>-->
-            <div class="dropdown">
+            <div class="dropup">
                 <button class="dropdown-toggle rounded px-3 p-2 mb-3 fw-bold" type="button" id="dropdownMenuButton"
                         data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     View Record
