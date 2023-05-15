@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_SESSION['user'] = (object)['id' => $row->user_id];
       header('Location: ' . base_url('dashboard.php'));
     } else {
-      setMessage('User and password Not matched!', 'danger');
+      setMessage('The username or password entered is incorrect, please try again!', 'danger');
     }
   } else {
     setMessage('User not exists!', 'danger');
@@ -79,6 +79,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="col-sm-6 pl">
           <p class="fw-bold">Not registered with us?</p>
           <button class="btn btn-primary" style="background-color: #142640; color: white;">Create an Account</button>
+        </div>
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="col-sm-12 text-black  ">
+            <?php
+            if (isset($_SESSION['message'])) {
+              $error = $_SESSION['message'];
+              ?>
+              <div id="alertBox" class="alert alert-<?= $error->type ?> text-center"
+                   style="margin: 10px;"><?= $error->text ?></div>
+              <?php
+              unset($_SESSION['message']);
+            }
+            ?>
+          </div>
         </div>
       </div>
     </div>
