@@ -39,7 +39,8 @@ body {
 
 .button2 {
     width: 190px; /* set the desired width for the buttons */
-    height: 45px; /* set the desired height for the buttons */
+    height: 40px; /* set the desired height for the buttons */
+    background-color: #efefef;
 }
 
 .col-sm-6 {

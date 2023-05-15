@@ -156,12 +156,12 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
             </div>
             <div class="ps-4 p-3 border border-white text-center">
                 <button onclick="window.location.href = 'help.php';"
-                        class="button2 btn btn-outline-dark btn-lg btn-block mb-3 fw-bold px-5"
+                        class="button2 rounded btn-lg btn-block mb-3 px-4 fw-bold px-4 py-2"
                         style="background-color: #ffffff; color: #142640;">Help
                 </button>
                 <br>
                 <button onclick="window.location.href = 'support.php';"
-                        class="button2 btn btn-outline-dark btn-lg btn-block mb-3 px-4 fw-bold px-4"
+                        class="button2 rounded btn-lg btn-block mb-3 px-4 fw-bold px-4 py-2"
                         style="background-color: #ffffff; color: #142640;">Support
                 </button>
                 <br>
