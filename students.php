@@ -18,6 +18,9 @@ $get_teacher = (object)$get_teacher_by_teacher_id->fetch_assoc();
 $class_query = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result = mysqli_query($link, $class_query);
 
+$class_query2 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result2 = mysqli_query($link, $class_query2);
+
 $get_class = $link->query("SELECT class.*, teacher_class.*, teacher.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'");
 
 //add student
@@ -124,18 +127,18 @@ if (isset($_POST['first_name'])) {
                         data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     Student progression
                 </button>
-<!--                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">-->
-<!--                    --><?php
-//                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
-//                        ?>
-<!--                        <a class="dropdown-item button2 fw-bold"-->
-<!--                           href="--><?php //= base_url('records.php') ?><!--?class=--><?php //= $class_row3["class_name"] ?><!--">-->
-<!--                            --><?php //= $class_row3["class_name"] ?>
-<!--                        </a>-->
-<!--                        --><?php
-//                    }
-//                    ?>
-<!--                </div>-->
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                    <?php
+                    while ($class_row2 = mysqli_fetch_array($class_result2)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('students.php') ?>?class=<?= $class_row2["class_name"] ?>">
+                            <?= $class_row2["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
 
             <div class="dropdown">

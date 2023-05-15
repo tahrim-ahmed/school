@@ -28,6 +28,10 @@ $class_result3 = mysqli_query($link, $class_query3);
 $class_query4 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result4 = mysqli_query($link, $class_query4);
 
+//for dropdown class in 'View Record' in topbar 
+$class_query5 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result5 = mysqli_query($link, $class_query5);
+
 //for counting underperforming student
 $count = 0;
 $underperform_query = "SELECT record.*, student.*, student_class.*, class.*, teacher_class.*, teacher.* FROM record INNER JOIN student ON record.student_id = student.student_id INNER JOIN student_class ON student.student_id = student_class.student_id INNER JOIN class ON student_class.class_id = class.class_id INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
@@ -86,18 +90,18 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
                     data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                 Student progression
                 </button>
-<!--                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">-->
-<!--                    --><?php
-//                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
-//                        ?>
-<!--                        <a class="dropdown-item button2 fw-bold"-->
-<!--                           href="--><?php //= base_url('records.php') ?><!--?class=--><?php //= $class_row3["class_name"] ?><!--">-->
-<!--                            --><?php //= $class_row3["class_name"] ?>
-<!--                        </a>-->
-<!--                        --><?php
-//                    }
-//                    ?>
-<!--                </div>-->
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                    <?php
+                    while ($class_row5 = mysqli_fetch_array($class_result5)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('students.php') ?>?class=<?= $class_row5["class_name"] ?>">
+                            <?= $class_row5["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
