@@ -53,7 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="d-flex align-items-center justify-content-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
             <form style="width: 23rem;" method="POST">
-
+              <?php
+                if (isset($_SESSION['message'])) {
+                  $error = $_SESSION['message'];
+                  ?>
+                  <div id="alertBox" class="alert alert-<?= $error->type ?> text-center" style="margin: 10px;"><?= $error->text ?></div>
+                  <?php
+                  unset($_SESSION['message']);
+                  }
+              ?>
               <h3 class="fw-bold text-center pb-3" style="letter-spacing: 1px;">Sign in</h3>
 
               <div class="form-group ">
