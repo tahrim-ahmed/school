@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else {
     setMessage('User not exists!', 'danger');
   }
-
 }
 ?>
 

@@ -171,11 +171,11 @@ if (isset($_POST['first_name'])) {
                         </div>
                         <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-name">First Name</label>
-                            <input type="text" name="first_name" id="first-name" class="form-control validate" required>
+                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters." name="first_name" id="first-name" class="form-control validate" required>
                         </div>
                         <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-email">Surname</label>
-                            <input type="text" name="sur_name" id="sur-name" class="form-control validate" required>
+                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters." name="sur_name" id="sur-name" class="form-control validate" required>
                         </div>
 
                         <div class="md-form mb-3">
