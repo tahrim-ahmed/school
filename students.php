@@ -119,9 +119,25 @@ if (isset($_POST['first_name'])) {
                 </div>
             </div>
             <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
-            <button onclick="window.location.href = 'notification.php';" type="button" class="button1 px-5 fw-bold">
-                Notifications
-            </button>
+            <div class="dropdown">
+                <button class="button1 dropdown-toggle fw-bold text-center" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                    Student progression
+                </button>
+<!--                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">-->
+<!--                    --><?php
+//                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
+//                        ?>
+<!--                        <a class="dropdown-item button2 fw-bold"-->
+<!--                           href="--><?php //= base_url('records.php') ?><!--?class=--><?php //= $class_row3["class_name"] ?><!--">-->
+<!--                            --><?php //= $class_row3["class_name"] ?>
+<!--                        </a>-->
+<!--                        --><?php
+//                    }
+//                    ?>
+<!--                </div>-->
+            </div>
+
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
                         data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
@@ -171,11 +187,13 @@ if (isset($_POST['first_name'])) {
                         </div>
                         <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-name">First Name</label>
-                            <input type="text" name="first_name" id="first-name" class="form-control validate" required>
+                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters."
+                                   name="first_name" id="first-name" class="form-control validate" required>
                         </div>
                         <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-email">Surname</label>
-                            <input type="text" name="sur_name" id="sur-name" class="form-control validate" required>
+                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters."
+                                   name="sur_name" id="sur-name" class="form-control validate" required>
                         </div>
 
                         <div class="md-form mb-3">
@@ -218,7 +236,8 @@ if (isset($_POST['first_name'])) {
 
                         <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i
                                 class="fa fa-pencil"></i></button>
-                        <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>" class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
+                        <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>"
+                           class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
 
 
                         <!--        Edit Student Modal -->
