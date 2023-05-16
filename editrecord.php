@@ -30,7 +30,7 @@ $class_result = mysqli_query($link, $class_query);
     <!-- Bootstrap  -->
     <link href="property/bootstrap/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Edit Student Record</title>
+    <title>Edit Record</title>
 </head>
 
 <body>
@@ -94,7 +94,7 @@ $class_result = mysqli_query($link, $class_query);
 
     <!-- Welcome Message  -->
     <div class="d-flex align-items-center justify-content-center pt-2">
-        <h3 class="pb-4"> Edit Student Information </h3>
+        <h3 class="pb-4"> Edit Student Record </h3>
     </div>
 
     <!-- Main Dashboard  -->
