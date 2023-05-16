@@ -227,15 +227,15 @@ if (isset($_POST['first_name'])) {
     </div>
 
     <!-- Student Details  -->
-    <div class="d-flex align-items-center justify-content-around">
+    <div class="mx-auto ">
         <table id="student_data" class="table table-striped bg-light rounded p-1 ">
             <thead style="color: black">
-            <tr class="px-5">
-                <th class="px-5 text-center" scope="col">ID</th>
-                <th class="px-5 text-center" scope="col">First Name</th>
-                <th class="px-5 text-center" scope="col">Surname</th>
-                <th class="px-5 text-center" scope="col">Date of Birth</th>
-                <th class="px-5 text-center" scope="col">Action</th>
+            <tr class="px-5 ">
+                <th class="text-center " scope="col">ID</th>
+                <th class="text-center " scope="col">First Name</th>
+                <th class="text-center " scope="col">Surname</th>
+                <th class="text-center " scope="col">Date of Birth</th>
+                <th class="text-center " scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -243,10 +243,10 @@ if (isset($_POST['first_name'])) {
             while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr style="color: black">
-                    <td class="px-5 text-center"><?= $row["student_id"] ?></td>
-                    <td class="px-5 text-center"><?= $row["first_name"] ?></td>
-                    <td class="px-5 text-center"><?= $row["sur_name"] ?></td>
-                    <td class="px-5 text-center"><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
+                    <td class="text-center"><?= $row["student_id"] ?></td>
+                    <td class="text-center"><?= $row["first_name"] ?></td>
+                    <td class="text-center"><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
+                    <td class="text-center"><?= $row["sur_name"] ?></td>
                     <td class="px-2 text-center">
 
                         <button onclick="window.location.href = 'editstudent.php';" class="btn btn-sm px-2 py-1 border border-success edit-button"><i
