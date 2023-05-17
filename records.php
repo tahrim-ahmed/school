@@ -122,34 +122,34 @@ $class_result2 = mysqli_query($link, $class_query2);
     </div>
 
     <!-- Student Details  -->
-    <div class="d-flex align-items-center  justify-content-around">
-        <table id="student_data" class="table table-striped bg-light rounded p-1">
+    <div class="overflow-scroll">
+        <table id="student_data" class="table table-responsive table-striped bg-light rounded ">
             <thead style="color: black">
-            <tr class="px-2">
-                <th class="px-2 text-center">▢</th>
-                <th class="px-2 text-center">Student ID</th>
-                <th class="px-2 text-center">First Name</th>
-                <th class="px-2 text-center">Surname</th>
-                <th class="px-2 text-center">Attendance</th>
-                <th class="px-2 text-center">Result</th>
-                <th class="px-2 text-center">Total</th>
-                <th class="px-2 text-center ml-3">Action</th>
+            <tr class="">
+                <th class="text-center">▢</th>
+                <th class=" text-center">Student ID</th>
+                <th class=" text-center">First Name</th>
+                <th class=" text-center">Surname</th>
+                <th class=" text-center">Attendance</th>
+                <th class=" text-center">Result</th>
+                <th class=" text-center">Total</th>
+                <th class=" text-center ml-3">Action</th>
             </tr>
             </thead>
             <tbody>
             <?php
             while ($row = mysqli_fetch_array($result)) {
                 ?>
-                <tr>
-                    <td class="px-2 text-center"
+                <tr class="">
+                    <td class=" text-center p-0"
                         style="color: <?= ($row["attendance"] + $row["result"]) < 40 ? 'red' : 'green' ?>;">■
                     </td>
-                    <td class="px-2 text-center"><?= $row["student_id"] ?></td>
-                    <td class="px-2 text-center"><?= $row["first_name"] ?></td>
-                    <td class="px-2 text-center"><?= $row["sur_name"] ?></td>
-                    <td class="px-2 text-center"><?= $row["attendance"] ?></td>
-                    <td class="px-2 text-center"><?= $row["result"] ?></td>
-                    <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
+                    <td class="text-center"><?= $row["student_id"] ?></td>
+                    <td class="text-center"><?= $row["first_name"] ?></td>
+                    <td class="text-center"><?= $row["sur_name"] ?></td>
+                    <td class="text-center"><?= $row["attendance"] ?></td>
+                    <td class="text-center"><?= $row["result"] ?></td>
+                    <td class="text-center"><?= $row["attendance"] + $row["result"] ?></td>
                     <td class="px-2 text-center">
                         <button onclick="window.location.href = 'editrecord.php';" class="btn btn-sm px-2 py-1 border border-success edit-button"><i
                                 class="fa fa-pencil"></i></button>
