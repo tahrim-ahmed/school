@@ -48,7 +48,7 @@ if ($get_student_result->num_rows > 0) {
 
     <!-- Menu Button  -->
     <div class=" mx-auto pt-3">
-        <div class="padding-left-5 p-4 d-flex  justify-content-around">
+        <div class="padding-left-5 p-4 d-flex justify-content-around flex-wrap">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
@@ -128,7 +128,7 @@ if ($get_student_result->num_rows > 0) {
                 <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                        placeholder="" name="result" value="<?= $student["result"] ?>">
             </div>
-            <button type="submit" class="button1 fw-bold">Update</button>
+            <button type="submit" class="button3 fw-bold">Update</button>
         </form>
     </div>
 </section>

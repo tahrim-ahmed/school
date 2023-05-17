@@ -43,6 +43,14 @@ body {
     background-color: #efefef;
 }
 
+.button3{
+    background-color: #142640;
+    border: 1px solid white;
+    color: white;
+    height: 40px;
+    width: 130px;
+}
+
 .col-sm-6 {
     position: relative;
     padding-left: 30px;

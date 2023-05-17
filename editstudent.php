@@ -107,7 +107,7 @@ if ($get_student_result->num_rows > 0) {
     </div>
 
     <!-- Main Dashboard  -->
-    <div class="d-flex align-items-center  justify-content-around">
+    <div class="d-flex align-items-center  justify-content-around flex-wrap">
         <form class="bg-white text-black p-4 px-5 rounded-2 w-50" method="POST" action="edit/editStudent.php">
             <div class="form-group mb-3">
                 <label for="exampleInputEmail1">Student ID</label>
@@ -126,7 +126,7 @@ if ($get_student_result->num_rows > 0) {
                 <label for="exampleInputEmail1">Date of Birth</label>
                 <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?= $student["date_of_birth"] ?>" name="date_of_birth">
             </div>
-            <button type="submit" class="button1 fw-bold">Update</button>
+            <button type="submit" class="button3 fw-bold">Update</button>
         </form>
     </div>
 </section>

@@ -60,11 +60,11 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
 
 <body>
 <img src="./image/cover.jpg" id="background-img" alt="background">
-<section class="container-fluid center-div-dashboard bkg w-75 text-white pb-5">
+<section class="container-fluid center-div-dashboard bkg w-75 text-white pb-5 mt-md-5 mt-sm-5 mt-lg-0">
 
     <!-- Menu Button  -->
     <div class=" mx-auto pt-3">
-        <div class="padding-left-5 p-4 d-flex justify-content-around">
+        <div class="padding-left-5 p-4 d-flex justify-content-around flex-wrap">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
@@ -122,7 +122,7 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
     </div>
 
     <!-- Main Dashboard  -->
-    <div class="d-flex align-items-center justify-content-around p-5">
+    <div class="d-flex align-items-center justify-content-around flex-wrap">
         <div class="border border-white p-3 text-center">
             <h5 class="">You currently have:</h5>
             <h4 class=""><?= $count ?> <?= $count == 1 ? 'Student' : 'Students' ?> </h4>

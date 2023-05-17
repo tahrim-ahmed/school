@@ -62,7 +62,7 @@ $class_result2 = mysqli_query($link, $class_query2);
 
     <!-- Menu Button  -->
     <div class=" mx-auto pt-3">
-        <div class="padding-left-5 p-4 d-flex justify-content-around">
+        <div class="padding-left-5 p-4 d-flex justify-content-around flex-wrap">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
@@ -122,18 +122,18 @@ $class_result2 = mysqli_query($link, $class_query2);
     </div>
 
     <!-- Student Details  -->
-    <div class="d-flex align-items-center  justify-content-around">
+    <div class="overflow-scroll">
         <table id="student_data" class="table table-striped bg-light rounded p-1">
             <thead style="color: black">
-            <tr class="px-2">
-                <th class="px-2 text-center">▢</th>
-                <th class="px-2 text-center">Student ID</th>
-                <th class="px-2 text-center">First Name</th>
-                <th class="px-2 text-center">Surname</th>
-                <th class="px-2 text-center">Attendance</th>
-                <th class="px-2 text-center">Performance Score</th>
-                <th class="px-2 text-center">Overall Score</th>
-                <th class="px-2 text-center ml-3">Action</th>
+            <tr class="">
+                <th class="text-center">▢</th>
+                <th class="text-center">Student ID</th>
+                <th class="text-center">First Name</th>
+                <th class="text-center">Surname</th>
+                <th class="text-center">Attendance</th>
+                <th class="text-center">Performance Score</th>
+                <th class="text-center">Overall Score</th>
+                <th class="text-center ml-3">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -141,15 +141,15 @@ $class_result2 = mysqli_query($link, $class_query2);
             while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr>
-                    <td class="px-2 text-center"
+                    <td class="text-center"
                         style="color: <?= ($row["result"]) < 40 ? 'red' : 'green' ?>;">■
                     </td>
-                    <td class="px-2 text-center"><?= $row["student_id"] ?></td>
-                    <td class="px-2 text-center"><?= $row["first_name"] ?></td>
-                    <td class="px-2 text-center"><?= $row["sur_name"] ?></td>
-                    <td class="px-2 text-center"><?= $row["attendance"] ?></td>
-                    <td class="px-2 text-center"><?= $row["result"] ?></td>
-                    <td class="px-2 text-center"><?= (int)(($row["attendance"] + $row["result"]) / 2) ?></td>
+                    <td class="text-center"><?= $row["student_id"] ?></td>
+                    <td class="text-center"><?= $row["first_name"] ?></td>
+                    <td class="text-center"><?= $row["sur_name"] ?></td>
+                    <td class="text-center"><?= $row["attendance"] ?></td>
+                    <td class="text-center"><?= $row["result"] ?></td>
+                    <td class="text-center"><?= (int)(($row["attendance"] + $row["result"]) / 2) ?></td>
                     <td class="px-2 text-center">
                         <a href="<?= base_url('editRecord.php') ?>?ID=<?= $row["student_id"] ?>" class="btn btn-sm px-2 py-1 border border-success edit-button"><i class="fa fa-pencil"></i></a>
                         <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>"

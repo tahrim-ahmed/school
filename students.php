@@ -103,7 +103,7 @@ if (isset($_POST['first_name'])) {
 
     <!-- Menu Button  -->
     <div class=" mx-auto pt-3">
-        <div class="padding-left-5 p-4 d-flex justify-content-around">
+        <div class="padding-left-5 p-4 d-flex justify-content-around flex-wrap">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
