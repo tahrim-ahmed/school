@@ -249,8 +249,7 @@ if (isset($_POST['first_name'])) {
                     <td class="text-center"><?= $row["sur_name"] ?></td>
                     <td class="px-2 text-center">
 
-                        <button onclick="window.location.href = 'editstudent.php';" class="btn btn-sm px-2 py-1 border border-success edit-button"><i
-                                class="fa fa-pencil"></i></button>
+                        <a href="<?= base_url('editStudent.php') ?>?ID=<?= $row["student_id"] ?>" class="btn btn-sm px-2 py-1 border border-success edit-button"><i class="fa fa-pencil"></i></a>
                         <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>"
                            class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
 

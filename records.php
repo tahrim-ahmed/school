@@ -151,8 +151,7 @@ $class_result2 = mysqli_query($link, $class_query2);
                     <td class="px-2 text-center"><?= $row["result"] ?></td>
                     <td class="px-2 text-center"><?= (int)(($row["attendance"] + $row["result"]) / 2) ?></td>
                     <td class="px-2 text-center">
-                        <button onclick="window.location.href = 'editrecord.php';" class="btn btn-sm px-2 py-1 border border-success edit-button"><i
-                                class="fa fa-pencil"></i></button>
+                        <a href="<?= base_url('editRecord.php') ?>?ID=<?= $row["student_id"] ?>" class="btn btn-sm px-2 py-1 border border-success edit-button"><i class="fa fa-pencil"></i></a>
                         <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>"
                            class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
 
