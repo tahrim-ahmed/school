@@ -192,12 +192,12 @@ if (isset($_POST['first_name'])) {
                         </div>
                         <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-name">First Name</label>
-                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters."
+                            <input type="text" pattern="^[a-zA-Z\s]*$" title="Please enter only alphabetical characters."
                                    name="first_name" id="first-name" class="form-control validate" required>
                         </div>
                         <div class="md-form mb-3">
                             <label data-error="wrong" data-success="right" for="orangeForm-email">Surname</label>
-                            <input type="text" pattern="[A-Za-z]+" title="Please enter only alphabetical characters."
+                            <input type="text" pattern="^[a-zA-Z\s]*$" title="Please enter only alphabetical characters."
                                    name="sur_name" id="sur-name" class="form-control validate" required>
                         </div>
 
@@ -227,15 +227,15 @@ if (isset($_POST['first_name'])) {
     </div>
 
     <!-- Student Details  -->
-    <div class="d-flex align-items-center justify-content-around">
+    <div class="mx-auto ">
         <table id="student_data" class="table table-striped bg-light rounded p-1 ">
             <thead style="color: black">
-            <tr class="px-5">
-                <th class="px-5 text-center" scope="col">ID</th>
-                <th class="px-5 text-center" scope="col">First Name</th>
-                <th class="px-5 text-center" scope="col">Surname</th>
-                <th class="px-5 text-center" scope="col">Date of Birth</th>
-                <th class="px-5 text-center" scope="col">Action</th>
+            <tr class="px-5 ">
+                <th class="text-center " scope="col">ID</th>
+                <th class="text-center " scope="col">First Name</th>
+                <th class="text-center " scope="col">Surname</th>
+                <th class="text-center " scope="col">Date of Birth</th>
+                <th class="text-center " scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -243,64 +243,63 @@ if (isset($_POST['first_name'])) {
             while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr style="color: black">
-                    <td class="px-5 text-center"><?= $row["student_id"] ?></td>
-                    <td class="px-5 text-center"><?= $row["first_name"] ?></td>
-                    <td class="px-5 text-center"><?= $row["sur_name"] ?></td>
-                    <td class="px-5 text-center"><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
+                    <td class="text-center"><?= $row["student_id"] ?></td>
+                    <td class="text-center"><?= $row["first_name"] ?></td>
+                    <td class="text-center"><?= date('d M, Y', strtotime($row["date_of_birth"])) ?></td>
+                    <td class="text-center"><?= $row["sur_name"] ?></td>
                     <td class="px-2 text-center">
 
-                        <button class="btn btn-sm px-2 py-1 border border-success edit-button"><i
-                                class="fa fa-pencil"></i></button>
+                        <a href="<?= base_url('editStudent.php') ?>?ID=<?= $row["student_id"] ?>" class="btn btn-sm px-2 py-1 border border-success edit-button"><i class="fa fa-pencil"></i></a>
                         <a href="<?= base_url('edit/deleteStudent.php') ?>?ID=<?= $row["student_id"] ?>"
                            class="btn btn-sm px-2 py-1 border border-danger"><i class="fa fa-trash"></i></a>
 
 
                         <!--        Edit Student Modal -->
-                        <div class="modal fade" id="modalRegisterForm2" tabindex="-1" role="dialog"
-                             aria-labelledby="myModalLabel" aria-hidden="true">
-                            <form class="modal-dialog" role="document" action="<?= base_url('edit/editStudent.php') ?>"
-                                  method="POST">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit
-                                            Student Information</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body mx-3 text-black">
-                                        <div class="md-form mb-3">
-                                            <label style="text-align: left;" data-error="wrong" data-success="right"
-                                                   for="id">Student ID</label>
-                                            <input type="text" id="update_id" name="update_id"
-                                                   class="form-control validate" required readonly>
-                                        </div>
-                                        <div class="md-form mb-3">
-                                            <label style="text-align: left;" data-error="wrong" data-success="right"
-                                                   for="name">First Name</label>
-                                            <input type="text" id="update_first_name" name="update_first_name"
-                                                   class="form-control validate" required>
-                                        </div>
-                                        <div class="md-form mb-3">
-                                            <label class="level" data-success="right" for="sur-name">Surname</label>
-                                            <input type="text" id="update_sur_name" name="update_sur_name"
-                                                   class="form-control validate" required>
-                                        </div>
-
-                                        <div class="md-form mb-3">
-                                            <label data-error="wrong" data-success="right" for="date-of-birth">Date of
-                                                Birth</label>
-                                            <input type="date" id="update_date_of_birth" name="update_date_of_birth"
-                                                   class="form-control validate" required>
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer d-flex justify-content-center">
-                                        <button class="button1 fw-bold">Confirm</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+<!--                        <div class="modal fade" id="modalRegisterForm2" tabindex="-1" role="dialog"-->
+<!--                             aria-labelledby="myModalLabel" aria-hidden="true">-->
+<!--                            <form class="modal-dialog" role="document" action="--><?php //= base_url('edit/editStudent.php') ?><!--"-->
+<!--                                  method="POST">-->
+<!--                                <div class="modal-content">-->
+<!--                                    <div class="modal-header">-->
+<!--                                        <h4 class="modal-title w-100 text-black font-weight-bold text-center">Edit-->
+<!--                                            Student Information</h4>-->
+<!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                            <span aria-hidden="true">&times;</span>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                    <div class="modal-body mx-3 text-black">-->
+<!--                                        <div class="md-form mb-3">-->
+<!--                                            <label style="text-align: left;" data-error="wrong" data-success="right"-->
+<!--                                                   for="id">Student ID</label>-->
+<!--                                            <input type="text" id="update_id" name="update_id"-->
+<!--                                                   class="form-control validate" required readonly>-->
+<!--                                        </div>-->
+<!--                                        <div class="md-form mb-3">-->
+<!--                                            <label style="text-align: left;" data-error="wrong" data-success="right"-->
+<!--                                                   for="name">First Name</label>-->
+<!--                                            <input type="text" id="update_first_name" name="update_first_name"-->
+<!--                                                   class="form-control validate" required>-->
+<!--                                        </div>-->
+<!--                                        <div class="md-form mb-3">-->
+<!--                                            <label class="level" data-success="right" for="sur-name">Surname</label>-->
+<!--                                            <input type="text" id="update_sur_name" name="update_sur_name"-->
+<!--                                                   class="form-control validate" required>-->
+<!--                                        </div>-->
+<!---->
+<!--                                        <div class="md-form mb-3">-->
+<!--                                            <label data-error="wrong" data-success="right" for="date-of-birth">Date of-->
+<!--                                                Birth</label>-->
+<!--                                            <input type="date" id="update_date_of_birth" name="update_date_of_birth"-->
+<!--                                                   class="form-control validate" required>-->
+<!--                                        </div>-->
+<!---->
+<!--                                    </div>-->
+<!--                                    <div class="modal-footer d-flex justify-content-center">-->
+<!--                                        <button class="button1 fw-bold">Confirm</button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
 
                     </td>
                 </tr>

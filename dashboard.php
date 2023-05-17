@@ -64,7 +64,7 @@ while ($underperform_row = mysqli_fetch_array($underperform_result)) {
 
     <!-- Menu Button  -->
     <div class=" mx-auto pt-3">
-        <div class="padding-left-5 p-4 d-flex  justify-content-around">
+        <div class="padding-left-5 p-4 d-flex justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"

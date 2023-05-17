@@ -18,6 +18,9 @@ $get_teacher = (object)$get_teacher_by_teacher_id->fetch_assoc();
 $class_query = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result = mysqli_query($link, $class_query);
 
+$class_query2 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result2 = mysqli_query($link, $class_query2);
+
 ?>
 
 <!DOCTYPE html>
@@ -79,24 +82,23 @@ $class_result = mysqli_query($link, $class_query);
                     ?>
                 </div>
             </div>
-            <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
             <div class="dropdown">
                 <button class="button1 dropdown-toggle fw-bold text-center" type="button" id="dropdownMenuButton"
                         data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     Student progression
                 </button>
-                <!--                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">-->
-                <!--                    --><?php
-                //                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
-                //                        ?>
-                <!--                        <a class="dropdown-item button2 fw-bold"-->
-                <!--                           href="--><?php //= base_url('records.php') ?><!--?class=--><?php //= $class_row3["class_name"] ?><!--">-->
-                <!--                            --><?php //= $class_row3["class_name"] ?>
-                <!--                        </a>-->
-                <!--                        --><?php
-                //                    }
-                //                    ?>
-                <!--                </div>-->
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                    <?php
+                    while ($class_row2 = mysqli_fetch_array($class_result2)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('records.php') ?>?class=<?= $class_row2["class_name"] ?>">
+                            <?= $class_row2["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
@@ -127,8 +129,8 @@ $class_result = mysqli_query($link, $class_query);
                 <th class="px-2 text-center">First Name</th>
                 <th class="px-2 text-center">Surname</th>
                 <th class="px-2 text-center">Attendance</th>
-                <th class="px-2 text-center">Result</th>
-                <th class="px-2 text-center">Total</th>
+                <th class="px-2 text-center">Performance Score</th>
+                <th class="px-2 text-center">Overall Score</th>
                 <th class="px-2 text-center">Status</th>
             </tr>
             </thead>
@@ -138,15 +140,15 @@ $class_result = mysqli_query($link, $class_query);
                 ?>
                 <tr>
                     <td class="px-2 text-center"
-                        style="color: <?= ($row["attendance"] + $row["result"]) < 40 ? 'red' : 'green' ?>;">■
+                        style="color: <?= ($row["result"]) < 40 ? 'red' : 'green' ?>;">■
                     </td>
                     <td class="px-2 text-center"><?= $row["student_id"] ?></td>
                     <td class="px-2 text-center"><?= $row["first_name"] ?></td>
                     <td class="px-2 text-center"><?= $row["sur_name"] ?></td>
                     <td class="px-2 text-center"><?= $row["attendance"] ?></td>
                     <td class="px-2 text-center"><?= $row["result"] ?></td>
-                    <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
-                    <td class="px-2 text-center"><?= ($row["attendance"] + $row["result"]) < 40 ? 'Underperforming' : 'Good' ?></td>
+                    <td class="px-2 text-center"><?= (int)(($row["attendance"] + $row["result"]) / 2) ?></td>
+                    <td class="px-2 text-center"><?= ($row["result"]) < 40 ? 'Underperforming' : 'Good' ?></td>
                 </tr>
                 <?php
             }
@@ -172,7 +174,24 @@ $class_result = mysqli_query($link, $class_query);
             'bServerSide': false,
             'ordering': false,
             dom: '<"row"<"col"B><"col-auto"f>>rt<"row"<"col"i><"col-auto"l>>p',
-            buttons: ['colvis',
+            buttons: [
+                {
+                extend: 'collection',
+                text: 'Performance',
+                buttons: [
+                    {
+                        text: 'Underperforming',
+                        action: function ( e, dt, node, config ) {
+                            dt.column( -2 ).visible( ! dt.column( -2 ).visible() );
+                        }
+                    },
+                    {
+                        text: 'Good',
+                        action: function ( e, dt, node, config ) {
+                            dt.column( -1 ).visible( ! dt.column( -1 ).visible() );
+                        }
+                    }
+                ]},
                 {
                     extend: 'collection',
                     text: 'Export',
@@ -205,7 +224,7 @@ $class_result = mysqli_query($link, $class_query);
                             }
                         }
                     ]
-                },],
+                }],
         });
     });
 </script>

@@ -16,6 +16,16 @@ $get_teacher = (object)$get_teacher_by_teacher_id->fetch_assoc();
 $class_query = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result = mysqli_query($link, $class_query);
 
+//for dropdown class in 'View Record' in top-bar
+$class_query2 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result2 = mysqli_query($link, $class_query2);
+
+$get_student_query = "SELECT record.*, student.*, student_class.*, class.*, teacher_class.*, teacher.* FROM record INNER JOIN student ON record.student_id = student.student_id INNER JOIN student_class ON student.student_id = student_class.student_id INNER JOIN class ON student_class.class_id = class.class_id INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id' AND student.student_id = '" . $_GET["ID"] . "'";
+$get_student_result = $link->query($get_student_query);
+
+if ($get_student_result->num_rows > 0) {
+    $student = mysqli_fetch_array($get_student_result);
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +39,7 @@ $class_result = mysqli_query($link, $class_query);
     <!-- Bootstrap  -->
     <link href="property/bootstrap/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384/KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Notification</title>
+    <title>Edit Record</title>
 </head>
 
 <body>
@@ -59,9 +69,24 @@ $class_result = mysqli_query($link, $class_query);
                 </div>
             </div>
             <!--            <button onclick="window.location.href = 'students.php';" type="button" class="button1  fw-bold">View Students</button>-->
-            <button onclick="window.location.href = 'notification.php';" type="button" class="button1 px-5 fw-bold">
-                Notifications
-            </button>
+            <div class="dropdown">
+                <button class="button1 dropdown-toggle fw-bold text-center" type="button" id="dropdownMenuButton"
+                        data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                    Student progression
+                </button>
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                    <?php
+                    while ($class_row2 = mysqli_fetch_array($class_result2)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('records.php') ?>?class=<?= $class_row2["class_name"] ?>">
+                            <?= $class_row2["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
                         data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
@@ -76,12 +101,35 @@ $class_result = mysqli_query($link, $class_query);
     </div>
 
     <!-- Welcome Message  -->
-    <div class="d-flex align-items-center justify-content-center pt-5">
-        <h3 class="pb-4">There are no notifications available at this time.</h3>
+    <div class="d-flex align-items-center justify-content-center pt-2">
+        <h3 class="pb-4"> Edit Student Record </h3>
     </div>
 
     <!-- Main Dashboard  -->
     <div class="d-flex align-items-center  justify-content-around">
+        <form class="bg-white text-black p-4 px-5 rounded-2 w-50" method="POST" action="edit/editRecord.php">
+            <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Student ID</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="" name="student_id" value="<?= $student["student_id"] ?>" readonly>
+            </div>
+            <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Full Name</label>
+                <input type="text"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="" name="full_name" value="<?= $student["first_name"]." ".$student["sur_name"] ?>">
+            </div>
+            <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Attendance</label>
+                <input type="number"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="" name="attendance" value="<?= $student["attendance"] ?>">
+            </div>
+            <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Result</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="" name="result" value="<?= $student["result"] ?>">
+            </div>
+            <button type="submit" class="button1 fw-bold">Update</button>
+        </form>
     </div>
 </section>
 
@@ -91,3 +139,4 @@ $class_result = mysqli_query($link, $class_query);
 </body>
 
 </html>
+

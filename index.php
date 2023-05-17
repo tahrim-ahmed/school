@@ -13,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($result->num_rows > 0) {
     $row = (object)$result->fetch_assoc();
     if ($password == $row->password) {
-      session_start();
+      if(!isset($_SESSION)) {
+        session_start();
+      }
       $_SESSION['user'] = (object)['id' => $row->user_id];
       header('Location: ' . base_url('dashboard.php'));
     } else {
