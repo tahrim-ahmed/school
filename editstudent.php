@@ -16,7 +16,9 @@ $get_teacher = (object)$get_teacher_by_teacher_id->fetch_assoc();
 $class_query = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
 $class_result = mysqli_query($link, $class_query);
 
-
+//for dropdown class in 'View Record' in top-bar
+$class_query2 = "SELECT class.*, teacher.*, teacher_class.* FROM class INNER JOIN teacher_class ON class.class_id = teacher_class.class_id INNER JOIN teacher ON teacher_class.teacher_id = teacher.teacher_id WHERE teacher.teacher_id = '$get_teacher_id'";
+$class_result2 = mysqli_query($link, $class_query2);
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ $class_result = mysqli_query($link, $class_query);
     <link rel="stylesheet" href="style.css">
     <!-- Bootstrap  -->
     <link href="property/bootstrap/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+          integrity="sha384/KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>Edit Student Info</title>
 </head>
 
@@ -39,7 +41,7 @@ $class_result = mysqli_query($link, $class_query);
 
     <!-- Menu Button  -->
     <div class=" mx-auto pt-3">
-        <div class="padding-left-5 p-4 d-flex  justify-content-around">
+        <div class="padding-left-5 p-4 d-flex justify-content-around">
             <button onclick="window.location.href = 'index.php';" type="button" class="button1 fw-bold">Home</button>
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
@@ -65,20 +67,20 @@ $class_result = mysqli_query($link, $class_query);
                         data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                     Student progression
                 </button>
-                <!--                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">-->
-                <!--                    --><?php
-                //                    while ($class_row3 = mysqli_fetch_array($class_result3)) {
-                //                        ?>
-                <!--                        <a class="dropdown-item button2 fw-bold"-->
-                <!--                           href="--><?php //= base_url('records.php') ?><!--?class=-->
-                <?php //= $class_row3["class_name"] ?><!--">-->
-                <!--                            --><?php //= $class_row3["class_name"] ?>
-                <!--                        </a>-->
-                <!--                        --><?php
-                //                    }
-                //                    ?>
-                <!--                </div>-->
+                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                    <?php
+                    while ($class_row2 = mysqli_fetch_array($class_result2)) {
+                        ?>
+                        <a class="dropdown-item button2 fw-bold"
+                           href="<?= base_url('records.php') ?>?class=<?= $class_row2["class_name"] ?>">
+                            <?= $class_row2["class_name"] ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
+
             <div class="dropdown">
                 <button class="dropdown-toggle button1 fw-bold" type="button" id="dropdownMenuButton"
                         data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
@@ -126,7 +128,7 @@ $class_result = mysqli_query($link, $class_query);
 </section>
 
 <script src="property/bootstrap/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        integrity="sha384/ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 </body>
 

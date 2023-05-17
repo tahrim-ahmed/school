@@ -131,8 +131,8 @@ $class_result2 = mysqli_query($link, $class_query2);
                 <th class="px-2 text-center">First Name</th>
                 <th class="px-2 text-center">Surname</th>
                 <th class="px-2 text-center">Attendance</th>
-                <th class="px-2 text-center">Result</th>
-                <th class="px-2 text-center">Total</th>
+                <th class="px-2 text-center">Performance Score</th>
+                <th class="px-2 text-center">Overall Score</th>
                 <th class="px-2 text-center ml-3">Action</th>
             </tr>
             </thead>
@@ -142,14 +142,14 @@ $class_result2 = mysqli_query($link, $class_query2);
                 ?>
                 <tr>
                     <td class="px-2 text-center"
-                        style="color: <?= ($row["attendance"] + $row["result"]) < 40 ? 'red' : 'green' ?>;">■
+                        style="color: <?= ($row["result"]) < 40 ? 'red' : 'green' ?>;">■
                     </td>
                     <td class="px-2 text-center"><?= $row["student_id"] ?></td>
                     <td class="px-2 text-center"><?= $row["first_name"] ?></td>
                     <td class="px-2 text-center"><?= $row["sur_name"] ?></td>
                     <td class="px-2 text-center"><?= $row["attendance"] ?></td>
                     <td class="px-2 text-center"><?= $row["result"] ?></td>
-                    <td class="px-2 text-center"><?= $row["attendance"] + $row["result"] ?></td>
+                    <td class="px-2 text-center"><?= (int)(($row["attendance"] + $row["result"]) / 2) ?></td>
                     <td class="px-2 text-center">
                         <button onclick="window.location.href = 'editrecord.php';" class="btn btn-sm px-2 py-1 border border-success edit-button"><i
                                 class="fa fa-pencil"></i></button>
